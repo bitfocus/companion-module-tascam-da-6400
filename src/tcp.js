@@ -1,13 +1,13 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, EOM, keepAliveInterval } = require('./consts.js')
+const { msgDelay, cmd, EOM, keepAliveInterval } = require('./consts.js')
 
 module.exports = {
-	async addCmdtoQueue(cmd) {
-		if (cmd !== undefined && cmd.length > 5) {
+	async addCmdtoQueue(msg) {
+		if (msg !== undefined && msg.length > 2) {
 			await this.cmdQueue.push(cmd)
 			return true
 		}
-		this.log('warn', `Invalid command: ${cmd}`)
+		this.log('warn', `Invalid command: ${msg}`)
 		return false
 	},
 
@@ -27,15 +27,15 @@ module.exports = {
 		return false
 	},
 
-	async sendCommand(cmd) {
-		if (cmd !== undefined) {
+	async sendCommand(msg) {
+		if (msg !== undefined) {
 			if (this.socket !== undefined && this.socket.isConnected) {
-				this.log('debug', `Sending Command: ${cmd}`)
+				this.log('debug', `Sending Command: ${msg}`)
 				this.clearToTx = false
-				this.socket.send(cmd + EOM)
+				this.socket.send(msg + EOM)
 				return true
 			} else {
-				this.log('warn', `Socket not connected, tried to send: ${cmd}`)
+				this.log('warn', `Socket not connected, tried to send: ${msg}`)
 			}
 		} else {
 			this.log('warn', 'Command undefined')
@@ -45,13 +45,13 @@ module.exports = {
 
 	//queries made on initial connection.
 	async queryOnConnect() {
-		this.addCmdtoQueue(this.config.password)
+		this.addCmdtoQueue(EOM + this.config.password)
 		return true
 	},
 
 	keepAlive() {
 		//request alive notifications
-		//this.addCmdtoQueue()
+		this.addCmdtoQueue(cmd.mechaStatusSense)
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)
