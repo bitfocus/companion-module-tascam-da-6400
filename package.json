@@ -1,0 +1,23 @@
+{
+	"name": "tascam-da-6400",
+	"version": "1.0.0",
+	"main": "src/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier --write",
+		"lint:raw": "eslint --ext .ts --ext .js --ignore-pattern dist --ignore-pattern pkg",
+		"lint": "yarn lint:raw ."
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/phillipivan/companion-module-tascam-da-6400.git"
+	},
+	"dependencies": {
+		"@companion-module/base": "~1.5.1"
+	},
+	"devDependencies": {
+		"@companion-module/tools": "^1.4.1"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json"
+}
