@@ -10,8 +10,6 @@ module.exports = {
 		let response = reply.substr(1, 2)
 		let venderCmd = reply.substr(1, 6)
 		switch (response) {
-			case resp.illegal:
-				break
 			case resp.infoReturn:
 				break
 			case resp.repeatModeSelectReturn:

@@ -81,7 +81,6 @@ export const cmd = {
 }
 
 export const resp = {
-	illegal: 'F2',
 	infoReturn: '8F',
 	clockDataReturn: 'A7',
 	repeatModeSelectReturn: 'B7',
