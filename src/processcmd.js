@@ -24,6 +24,7 @@ module.exports = {
 		let param = []
 		switch (response) {
 			case resp.keepAlive:
+				this.log('debug', `keepAlive`)
 				break
 			case resp.infoReturn:
 				break
@@ -33,7 +34,7 @@ module.exports = {
 				break
 			case resp.mechaStatusReturn:
 				param[0] = reply.substr(3, 2)
-				this.recoder.mechaStatus = param[0] === undefined ? this.recoder.mechaStatus : param[0]
+				this.recorder.mechaStatus = param[0] === undefined ? this.recoder.mechaStatus : param[0]
 				this.updateFeedbacks('mechaStatus')
 				break
 			case resp.trackNoStatusReturn:
@@ -49,9 +50,11 @@ module.exports = {
 			case resp.keyboardTypeReturn:
 				break
 			case resp.errorSenseRequest:
+				this.log('debug', `errorSenseRequest`)
 				this.addCmdtoQueue(SOM + cmd.errorSense)
 				break
 			case resp.cautionSenseRequest:
+				this.log('debug', `cautionSenseRequest`)
 				this.addCmdtoQueue(SOM + cmd.cautionSense)
 				break
 			case resp.illegalStatus:
@@ -70,82 +73,107 @@ module.exports = {
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
 				switch (param[0]) {
 					case '0-00':
+						this.log('info', `errorSenseReturn: No Error`)
 						//no error
 						break
 					case '0-01':
 						//rec error
+						this.log('warn', `errorSenseReturn: Record Error`)
 						break
 					case '1-02':
 						//device error
+						this.log('warn', `errorSenseReturn: Device Error`)
 						break
 					case '1-09':
 						//info write error
+						this.log('warn', `errorSenseReturn: Infomation Write Error`)
 						break
 					case '1-FF':
 						//Other Error
+						this.log('warn', `errorSenseReturn: Other Error`)
 						break
 					default:
 						//Shouldn't occur
 						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
 				}
+				this.recorder.error = param[0]
+				this.updateFeedbacks('error')
 				break
 			case resp.cautionSenseReturn:
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
 				switch (param[0]) {
 					case '0-00':
 						//no caution
+						this.log('info', `caustionSenseReturn: No Caution`)
 						break
 					case '0-01':
 						//Media Error
+						this.log('warn', `caustionSenseReturn: Media Error`)
 						break
 					case '1-06':
 						//Media Full
+						this.log('warn', `caustionSenseReturn: Media Full`)
 						break
 					case '1-07':
 						//Take Full
+						this.log('warn', `caustionSenseReturn: Take Full`)
 						break
 					case '1-09':
 						//Digital Unlock
+						this.log('warn', `caustionSenseReturn: Digital Unlock`)
 						break
 					case '1-0B':
 						//Can't REC
+						this.log('warn', `caustionSenseReturn: Can't REC`)
 						break
 					case '1-0C':
 						//Write Protected
+						this.log('warn', `caustionSenseReturn: Write Protected`)
 						break
 					case '1-0D':
 						//Not Execute
+						this.log('warn', `caustionSenseReturn: Not Execute`)
 						break
 					case '1-0F':
 						//Can't Edit
+						this.log('warn', `caustionSenseReturn: Can't Edit`)
 						break
 					case '1-13':
 						//Can't Select
+						this.log('warn', `caustionSenseReturn: Can't Select`)
 						break
 					case '1-14':
 						//Track Protected
+						this.log('warn', `caustionSenseReturn: Track Protected`)
 						break
 					case '1-16':
 						//Name Full
+						this.log('warn', `caustionSenseReturn: Name Full`)
 						break
 					case '1-1E':
 						//Play Error
+						this.log('warn', `caustionSenseReturn: Play Error`)
 						break
 					case '1-FF':
 						//Other Caution
+						this.log('warn', `caustionSenseReturn: Other Caution`)
 						break
 					default:
 						//Shouldn't occur
 						this.log('warn', `caustionSenseReturn: Switch Default: ${param[0]}`)
 				}
+				this.recorder.caution = param[0]
+				this.updateFeedbacks('caution')
 				break
 			case resp.venderCommandReturn:
 				switch (venderCmd) {
 					case resp.projectCreateReturn:
 						break
 					case resp.projectRebuildAck:
+						this.log('debug', `projectRebuildAck`)
 						break
 					case resp.projectDeleteAck:
+						this.log('debug', `projectDeleteAck`)
 						break
 					case resp.projectNoReturn:
 						break
@@ -204,6 +232,7 @@ module.exports = {
 					case resp.mediaRemainReturn:
 						break
 					case resp.mediaFormatAck:
+						this.log('debug', `mediaFormatAck`)
 						break
 					case resp.auxAssignKeyReturn:
 						break
@@ -218,10 +247,13 @@ module.exports = {
 					case resp.digitalReferenceLevelReturn:
 						break
 					case resp.takeRenameAck:
+						this.log('debug', `takeRenameAck`)
 						break
 					case resp.takeEraseAck:
+						this.log('debug', `takeEraseAck`)
 						break
 					case resp.takeCopyAck:
+						this.log('debug', `takeCopyAck`)
 						break
 					default:
 				}

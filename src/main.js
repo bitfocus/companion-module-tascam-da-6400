@@ -63,6 +63,8 @@ class TASCAM_DA_6400 extends InstanceBase {
 			repeatMode: 'unknown',
 			remoteLocal: 'unknown',
 			playMode: 'unknown',
+			error: 'unknown',
+			caution: 'unknown',
 		}
 	}
 

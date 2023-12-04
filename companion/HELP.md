@@ -46,7 +46,9 @@ Enter the IP address, port and password of the recorder.
 
 
 ## Feedbacks
-**Status**
+**Mecha Status**
+**Caution**
+**Error**
 
 ## Version History
 
