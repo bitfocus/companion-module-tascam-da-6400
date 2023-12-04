@@ -1,4 +1,4 @@
-const { resp, SOM } = require('./consts.js')
+const { resp, cmd, SOM } = require('./consts.js')
 
 module.exports = {
 	async processCmd(chunk) {
@@ -49,16 +49,95 @@ module.exports = {
 			case resp.keyboardTypeReturn:
 				break
 			case resp.errorSenseRequest:
+				this.addCmdtoQueue(SOM + cmd.errorSense)
 				break
 			case resp.cautionSenseRequest:
+				this.addCmdtoQueue(SOM + cmd.cautionSense)
 				break
 			case resp.illegalStatus:
+				this.log('warn', 'Illegal Status: Invalid Command')
 				break
 			case resp.changeStatus:
+				param[0] = reply.substr(3, 2)
+				if (param[0] == '00') {
+					//mecha status changed
+					this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
+				} else if (param[0] == '03') {
+					//take number changed
+				}
 				break
 			case resp.errorSenseReturn:
+				param[0] = reply[6] + '-' + reply[3] + reply[4]
+				switch (param[0]) {
+					case '0-00':
+						//no error
+						break
+					case '0-01':
+						//rec error
+						break
+					case '1-02':
+						//device error
+						break
+					case '1-09':
+						//info write error
+						break
+					case '1-FF':
+						//Other Error
+						break
+					default:
+						//Shouldn't occur
+						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
+				}
 				break
 			case resp.cautionSenseReturn:
+				param[0] = reply[6] + '-' + reply[3] + reply[4]
+				switch (param[0]) {
+					case '0-00':
+						//no caution
+						break
+					case '0-01':
+						//Media Error
+						break
+					case '1-06':
+						//Media Full
+						break
+					case '1-07':
+						//Take Full
+						break
+					case '1-09':
+						//Digital Unlock
+						break
+					case '1-0B':
+						//Can't REC
+						break
+					case '1-0C':
+						//Write Protected
+						break
+					case '1-0D':
+						//Not Execute
+						break
+					case '1-0F':
+						//Can't Edit
+						break
+					case '1-13':
+						//Can't Select
+						break
+					case '1-14':
+						//Track Protected
+						break
+					case '1-16':
+						//Name Full
+						break
+					case '1-1E':
+						//Play Error
+						break
+					case '1-FF':
+						//Other Caution
+						break
+					default:
+						//Shouldn't occur
+						this.log('warn', `caustionSenseReturn: Switch Default: ${param[0]}`)
+				}
 				break
 			case resp.venderCommandReturn:
 				switch (venderCmd) {
