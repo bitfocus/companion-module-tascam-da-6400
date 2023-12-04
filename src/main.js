@@ -5,7 +5,6 @@ const UpdateFeedbacks = require('./feedbacks.js')
 const UpdateVariableDefinitions = require('./variables.js')
 const config = require('./config.js')
 const choices = require('./choices.js')
-const util = require('./util.js')
 const tcp = require('./tcp.js')
 const processCmd = require('./processcmd.js')
 const { EndSession, msgDelay } = require('./consts.js')
@@ -13,7 +12,7 @@ const { EndSession, msgDelay } = require('./consts.js')
 class TASCAM_DA_6400 extends InstanceBase {
 	constructor(internal) {
 		super(internal)
-		Object.assign(this, { ...config, ...util, ...tcp, ...processCmd, ...choices })
+		Object.assign(this, { ...config, ...tcp, ...processCmd, ...choices })
 		this.keepAliveTimer = {}
 		this.cmdTimer = {}
 		this.cmdQueue = []

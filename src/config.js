@@ -1,4 +1,4 @@
-//const { Regex } = require('@companion-module/base')
+const { Regex } = require('@companion-module/base')
 
 module.exports = {
 	async configUpdated(config) {
@@ -18,14 +18,14 @@ module.exports = {
 				id: 'host',
 				label: 'Device IP',
 				width: 12,
-				regex: this.REGEX_IP,
+				regex: Regex.HOSTNAME,
 			},
 			{
 				type: 'textinput',
 				id: 'port',
 				label: 'Port',
 				width: 6,
-				regex: this.REGEX_PORT,
+				regex: Regex.PORT,
 				default: 23,
 				tooltip: 'Port is not configurable on unit, only change in advanced configurations',
 			},
@@ -35,7 +35,7 @@ module.exports = {
 				label: 'Password',
 				width: 6,
 				default: 'DA-6400',
-				regex: this.REGEX_SOMETHING,
+				regex: Regex.SOMETHING,
 			},
 		]
 	},

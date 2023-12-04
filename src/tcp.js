@@ -3,8 +3,8 @@ const { msgDelay, cmd, EOM, EndSession, keepAliveInterval } = require('./consts.
 
 module.exports = {
 	async addCmdtoQueue(msg) {
-		if (msg !== undefined && msg.length > 2) {
-			await this.cmdQueue.push(cmd)
+		if (msg !== undefined && msg.length > 0) {
+			await this.cmdQueue.push(msg)
 			return true
 		}
 		this.log('warn', `Invalid command: ${msg}`)
@@ -12,19 +12,12 @@ module.exports = {
 	},
 
 	async processCmdQueue() {
-		if (this.cmdQueue.length > 0 && this.clearToTx) {
-			//dont send command if still waiting for response from last command
+		if (this.cmdQueue.length > 0) {
 			this.sendCommand(await this.cmdQueue.splice(0, 1))
-			this.cmdTimer = setTimeout(() => {
-				this.processCmdQueue()
-			}, msgDelay)
-			return true
 		}
-		// run at double speed while the queue is empty for better responsiveness
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
-		}, msgDelay / 2)
-		return false
+		}, msgDelay)
 	},
 
 	async sendCommand(msg) {
@@ -44,8 +37,8 @@ module.exports = {
 
 	//queries made on initial connection.
 	async queryOnConnect() {
-		this.addCmdtoQueue(EOM)
-		return true
+		this.sendCommand('  ')
+		//this.addCmdtoQueue(this.config.password)
 	},
 
 	keepAlive() {
@@ -66,7 +59,7 @@ module.exports = {
 		if (this.config.host) {
 			this.log('debug', 'Creating New Socket')
 
-			this.updateStatus(`Connecting to DA-6400: ${this.config.host}`)
+			this.updateStatus(`Connecting to DA-6400: ${this.config.host}:${this.config.port}`)
 			this.socket = new TCPHelper(this.config.host, this.config.port)
 
 			this.socket.on('status_change', (status, message) => {
@@ -77,7 +70,7 @@ module.exports = {
 				clearTimeout(this.keepAliveTimer)
 			})
 			this.socket.on('connect', () => {
-				this.log('info', `Connected to ${this.config.host}`)
+				this.log('info', `Connected to ${this.config.host}:${this.config.port}`)
 				this.queryOnConnect()
 				this.keepAliveTimer = setTimeout(() => {
 					this.keepAlive()
@@ -90,9 +83,10 @@ module.exports = {
 				this.receiveBuffer += chunk
 				while ((i = this.receiveBuffer.indexOf(EOM, offset)) !== -1) {
 					line = this.receiveBuffer.substr(offset, i - offset)
-					offset = i + 1
+					offset = i + 2
 					this.processCmd(line.toString())
 				}
+				this.receiveBuffer = this.receiveBuffer.substr(offset)
 			})
 		} else {
 			this.updateStatus(InstanceStatus.BadConfig)

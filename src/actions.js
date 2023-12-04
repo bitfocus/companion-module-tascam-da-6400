@@ -5,7 +5,7 @@ module.exports = function (self) {
 	self.setActionDefinitions({
 		stop: {
 			name: 'Stop',
-			description: '',
+			description: 'Stop',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.stop)
@@ -15,7 +15,7 @@ module.exports = function (self) {
 		},
 		play: {
 			name: 'Play',
-			description: '',
+			description: 'Play',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.play)
@@ -25,7 +25,7 @@ module.exports = function (self) {
 		},
 		record: {
 			name: 'Record',
-			description: '',
+			description: 'Record',
 			options: [
 				{
 					type: 'dropdown',
@@ -43,7 +43,7 @@ module.exports = function (self) {
 		},
 		pause: {
 			name: 'Pause',
-			description: '',
+			description: 'Pause',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.pause + '01')
@@ -53,7 +53,7 @@ module.exports = function (self) {
 		},
 		search: {
 			name: 'Search',
-			description: '',
+			description: 'Search',
 			options: [
 				{
 					type: 'dropdown',
@@ -71,7 +71,7 @@ module.exports = function (self) {
 		},
 		skip: {
 			name: 'Skip',
-			description: '',
+			description: 'Skip',
 			options: [
 				{
 					type: 'dropdown',

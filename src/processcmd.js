@@ -2,7 +2,8 @@ const { resp, SOM } = require('./consts.js')
 
 module.exports = {
 	async processCmd(chunk) {
-		let reply = chunk
+		let reply = chunk.toString()
+		this.log('debug', `response recieved: ${reply}`)
 		//let varList = []
 		switch (reply) {
 			case resp.password:
@@ -12,8 +13,11 @@ module.exports = {
 				this.updateStatus(`Logged in to: ${this.config.host}`)
 				return true
 		}
-		while (reply[0] != SOM) {
+		while (reply[0] != SOM && reply.length > 0) {
 			reply = reply.slice(1)
+		}
+		if (reply.length == 0) {
+			return false
 		}
 		let response = reply.substr(1, 2)
 		let venderCmd = reply.substr(1, 6)
