@@ -36,7 +36,7 @@ module.exports = function (self) {
 				},
 			],
 			callback: async ({ options }) => {
-				self.addCmdtoQueue(SOM + cmd.play + options.mode)
+				self.addCmdtoQueue(SOM + cmd.record + options.mode)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
