@@ -21,6 +21,7 @@ module.exports = {
 		}
 		let response = reply.substr(1, 2)
 		let venderCmd = reply.substr(1, 6)
+		let param = []
 		switch (response) {
 			case resp.keepAlive:
 				break
@@ -31,6 +32,9 @@ module.exports = {
 			case resp.playModeReturn:
 				break
 			case resp.mechaStatusReturn:
+				param[0] = reply.substr(3, 2)
+				this.recoder.mechaStatus = param[0] === undefined ? this.recoder.mechaStatus : param[0]
+				this.updateFeedbacks('mechaStatus')
 				break
 			case resp.trackNoStatusReturn:
 				break

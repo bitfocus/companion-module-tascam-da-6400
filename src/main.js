@@ -49,7 +49,11 @@ class TASCAM_DA_6400 extends InstanceBase {
 		this.setVariableValues(varList)
 	}
 
-	initVariables() {}
+	initVariables() {
+		this.recorder = {
+			mechaStatus: 'unknown',
+		}
+	}
 
 	updateActions() {
 		UpdateActions(this)

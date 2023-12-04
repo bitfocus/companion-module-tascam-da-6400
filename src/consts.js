@@ -147,3 +147,18 @@ export const resp = {
 	takeEraseAck: 'FF42B0',
 	takeCopyAck: 'FF42D2',
 }
+
+export const respParam = {
+	mechaStatusReturn: {
+		noMedia: '00',
+		stop: '10',
+		play: '11',
+		readyOn: '12',
+		cue: '28',
+		review: '29',
+		record: '81',
+		recordReady: '82',
+		infomationWriting: '83',
+		other: 'FF',
+	},
+}
