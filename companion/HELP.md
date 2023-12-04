@@ -18,6 +18,29 @@ Enter the IP address, port and password of the recorder.
 - **Remote/Local Select**
 - **Play Mode Select**
 - **Mark Set**
+- **Current Track Time**
+- **Project Skip**
+- **Rebuild Project**
+- **Chase Select**
+- **TC Restart**
+- **TC Generator Mode**
+- **TC Frame Type**
+- **TC Output Mode**
+- **Clock Master Select**
+- **Word Thru Select**
+- **Pause Mode**
+- **Audio Over Marker**
+- **Time Interval Marker**
+- **Sync Unlock Marker**
+- **REC FS Select**
+- **File Name Select**
+- **Media Format**
+- **Aux Assign Key**
+- **Aux Assign Key Tally**
+- **Meter Peak Hold Time**
+- **Meter Peak Clear**
+- **Digital Reference Level**
+
 
 ## Variables
 
