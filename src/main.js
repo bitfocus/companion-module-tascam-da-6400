@@ -17,12 +17,10 @@ class TASCAM_DA_6400 extends InstanceBase {
 		this.keepAliveTimer = {}
 		this.cmdTimer = {}
 		this.cmdQueue = []
-		this.clearToTx = true
 	}
 	async init(config) {
 		this.updateStatus('Starting')
 		this.config = config
-		this.useSecondary = false
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
 		}, msgDelay)
@@ -41,11 +39,10 @@ class TASCAM_DA_6400 extends InstanceBase {
 		this.keepAliveTimer = null
 		this.cmdTimer = null
 		if (this.socket) {
-			await this.sendCommand(EndSession)
+			this.sendCommand(EndSession)
 			this.socket.destroy()
-		} else {
-			this.updateStatus(InstanceStatus.Disconnected)
 		}
+		this.updateStatus(InstanceStatus.Disconnected)
 	}
 
 	updateVariableValues() {

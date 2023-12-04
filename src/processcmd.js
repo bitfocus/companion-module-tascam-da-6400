@@ -4,12 +4,22 @@ module.exports = {
 	async processCmd(chunk) {
 		let reply = chunk
 		//let varList = []
+		switch (reply) {
+			case resp.password:
+				this.addCmdtoQueue(this.config.password)
+				return true
+			case resp.loginSuccess:
+				this.updateStatus(`Logged in to: ${this.config.host}`)
+				return true
+		}
 		while (reply[0] != SOM) {
 			reply = reply.slice(1)
 		}
 		let response = reply.substr(1, 2)
 		let venderCmd = reply.substr(1, 6)
 		switch (response) {
+			case resp.keepAlive:
+				break
 			case resp.infoReturn:
 				break
 			case resp.repeatModeSelectReturn:

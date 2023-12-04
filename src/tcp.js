@@ -1,5 +1,5 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, cmd, EOM, keepAliveInterval } = require('./consts.js')
+const { msgDelay, cmd, EOM, EndSession, keepAliveInterval } = require('./consts.js')
 
 module.exports = {
 	async addCmdtoQueue(msg) {
@@ -31,7 +31,6 @@ module.exports = {
 		if (msg !== undefined) {
 			if (this.socket !== undefined && this.socket.isConnected) {
 				this.log('debug', `Sending Command: ${msg}`)
-				this.clearToTx = false
 				this.socket.send(msg + EOM)
 				return true
 			} else {
@@ -45,7 +44,7 @@ module.exports = {
 
 	//queries made on initial connection.
 	async queryOnConnect() {
-		this.addCmdtoQueue(EOM + this.config.password)
+		this.addCmdtoQueue(EOM)
 		return true
 	},
 
@@ -60,13 +59,14 @@ module.exports = {
 	initTCP() {
 		this.receiveBuffer = ''
 		if (this.socket !== undefined) {
+			this.sendCommand(EndSession)
 			this.socket.destroy()
 			delete this.socket
 		}
 		if (this.config.host) {
 			this.log('debug', 'Creating New Socket')
 
-			this.updateStatus('Connecting to Secondary')
+			this.updateStatus(`Connecting to DA-6400: ${this.config.host}`)
 			this.socket = new TCPHelper(this.config.host, this.config.port)
 
 			this.socket.on('status_change', (status, message) => {
@@ -74,27 +74,16 @@ module.exports = {
 			})
 			this.socket.on('error', (err) => {
 				this.log('error', `Network error: ${err.message}`)
-				this.clearToTx = true
 				clearTimeout(this.keepAliveTimer)
-				if (this.config.redundant) {
-					this.useSecondary = !this.useSecondary
-					this.initTCP()
-				}
 			})
 			this.socket.on('connect', () => {
-				if (this.useSecondary) {
-					this.log('info', `Connected on Secondary ${this.config.hostSec}`)
-				} else {
-					this.log('info', `Connected on Primary ${this.config.hostPri}`)
-				}
-				this.clearToTx = true
+				this.log('info', `Connected to ${this.config.host}`)
 				this.queryOnConnect()
 				this.keepAliveTimer = setTimeout(() => {
 					this.keepAlive()
 				}, keepAliveInterval)
 			})
 			this.socket.on('data', (chunk) => {
-				this.clearToTx = true
 				let i = 0,
 					line = '',
 					offset = 0

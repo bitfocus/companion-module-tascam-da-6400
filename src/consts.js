@@ -3,6 +3,7 @@ export const msgDelay = 20 // Always leave at least 20 ms open between commands
 export const keepAliveInterval = 60000
 export const SOM = '0'
 export const EOM = '\r\n'
+export const EndSession = 'exit'
 export const cmd = {
 	infoReq: '0F',
 	stop: '10',
@@ -81,6 +82,9 @@ export const cmd = {
 }
 
 export const resp = {
+	password: 'Enter Password',
+	loginSuccess: 'Login Successful',
+	keepAlive: 'FA',
 	infoReturn: '8F',
 	clockDataReturn: 'A7',
 	repeatModeSelectReturn: 'B7',
