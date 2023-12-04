@@ -1,5 +1,5 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, cmd, EOM, EndSession, keepAliveInterval } = require('./consts.js')
+const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval } = require('./consts.js')
 
 module.exports = {
 	async addCmdtoQueue(msg) {
@@ -43,7 +43,7 @@ module.exports = {
 
 	keepAlive() {
 		//request alive notifications
-		this.addCmdtoQueue(cmd.mechaStatusSense)
+		this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)

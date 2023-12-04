@@ -10,7 +10,7 @@ module.exports = {
 				this.addCmdtoQueue(this.config.password)
 				return true
 			case resp.loginSuccess:
-				this.updateStatus(`Logged in to: ${this.config.host}`)
+				this.updateStatus('ok', 'Logged in')
 				return true
 		}
 		while (reply[0] != SOM && reply.length > 0) {
