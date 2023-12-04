@@ -87,5 +87,69 @@ module.exports = function (self) {
 			//learn: async () => {},
 			//subscribe: async () => {},
 		},
+		repeat_mode: {
+			name: 'Repeat Mode',
+			description: 'Repeat Mode',
+			options: [
+				{
+					type: 'dropdown',
+					id: 'mode',
+					label: 'Mode',
+					choices: self.repeat_mode,
+					default: '00',
+				},
+			],
+			callback: async ({ options }) => {
+				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + options.mode)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		remoteLocal_mode: {
+			name: 'Remote/Local Select',
+			description: 'Remote/Local Select',
+			options: [
+				{
+					type: 'dropdown',
+					id: 'mode',
+					label: 'Mode',
+					choices: self.remoteLocal_mode,
+					default: '00',
+				},
+			],
+			callback: async ({ options }) => {
+				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + options.mode)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		play_mode: {
+			name: 'Play Mode Select',
+			description: 'Play Mode Select',
+			options: [
+				{
+					type: 'dropdown',
+					id: 'mode',
+					label: 'Mode',
+					choices: self.play_mode,
+					default: '00',
+				},
+			],
+			callback: async ({ options }) => {
+				self.addCmdtoQueue(SOM + cmd.playModeSelect + options.mode)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		mark_set: {
+			name: 'Mark Set',
+			description: 'Mark Set',
+			options: [],
+			callback: async () => {
+				self.addCmdtoQueue(SOM + cmd.markSet + '01')
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
 	})
 }

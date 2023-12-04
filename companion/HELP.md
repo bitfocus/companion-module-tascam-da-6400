@@ -14,7 +14,10 @@ Enter the IP address, port and password of the recorder.
 - **Pause** 
 - **Search** 
 - **Skip**
-
+- **Repeat Mode**
+- **Remote/Local Select**
+- **Play Mode Select**
+- **Mark Set**
 
 ## Variables
 
