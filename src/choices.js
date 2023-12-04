@@ -70,6 +70,11 @@ module.exports = {
 		{ id: 'FF', label: 'Sense' },
 	],
 	tcOutputSelect_mode: [
+		{ id: '00', label: 'Generator Out' },
+		{ id: '01', label: 'Play Out' },
+		{ id: 'FF', label: 'Sense' },
+	],
+	clockMasterSelect_mode: [
 		{ id: '00', label: 'Internal' },
 		{ id: '01', label: 'Word' },
 		{ id: '02', label: 'Video' },
