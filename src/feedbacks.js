@@ -20,7 +20,7 @@ module.exports = async function (self) {
 				},
 			],
 			callback: ({ options }) => {
-				return options.status == this.recorder.mechaStatus
+				return options.status == self.recorder.mechaStatus
 			},
 		},
 		error: {
@@ -41,7 +41,7 @@ module.exports = async function (self) {
 				},
 			],
 			callback: ({ options }) => {
-				return options.status == this.recorder.error
+				return options.error == self.recorder.error
 			},
 		},
 		caution: {
@@ -62,7 +62,7 @@ module.exports = async function (self) {
 				},
 			],
 			callback: ({ options }) => {
-				return options.status == this.recorder.caution
+				return options.caution == self.recorder.caution
 			},
 		},
 	})

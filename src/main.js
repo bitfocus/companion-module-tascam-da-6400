@@ -23,12 +23,12 @@ class TASCAM_DA_6400 extends InstanceBase {
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
 		}, msgDelay)
-		this.initTCP()
-		this.initVariables()
+		await this.initVariables()
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
 		this.updateVariableValues()
+		this.initTCP()
 	}
 	// When module gets deleted
 	async destroy() {
@@ -54,7 +54,7 @@ class TASCAM_DA_6400 extends InstanceBase {
 			mechaStatus: 'unknown',
 			clock: {
 				year: 'unknown',
-				month: 'unkown',
+				month: 'unknown',
 				day: 'unknown',
 				hour: 'unknown',
 				minute: 'unknown',

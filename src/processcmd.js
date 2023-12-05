@@ -11,6 +11,7 @@ module.exports = {
 				return true
 			case resp.loginSuccess:
 				this.updateStatus('ok', 'Logged in')
+				this.log('info', 'OK: Logged In')
 				return true
 		}
 		while (reply[0] != SOM && reply.length > 0) {
@@ -35,7 +36,7 @@ module.exports = {
 			case resp.mechaStatusReturn:
 				param[0] = reply.substr(3, 2)
 				this.recorder.mechaStatus = param[0] === undefined ? this.recoder.mechaStatus : param[0]
-				this.updateFeedbacks('mechaStatus')
+				this.checkFeedbacks('mechaStatus')
 				break
 			case resp.trackNoStatusReturn:
 				break
@@ -97,7 +98,7 @@ module.exports = {
 						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
 				}
 				this.recorder.error = param[0]
-				this.updateFeedbacks('error')
+				this.checkFeedbacks('error')
 				break
 			case resp.cautionSenseReturn:
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
@@ -163,7 +164,7 @@ module.exports = {
 						this.log('warn', `caustionSenseReturn: Switch Default: ${param[0]}`)
 				}
 				this.recorder.caution = param[0]
-				this.updateFeedbacks('caution')
+				this.checkFeedbacks('caution')
 				break
 			case resp.venderCommandReturn:
 				switch (venderCmd) {
