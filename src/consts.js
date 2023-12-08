@@ -146,6 +146,7 @@ export const resp = {
 	takeRenameAck: 'FF4280',
 	takeEraseAck: 'FF42B0',
 	takeCopyAck: 'FF42D2',
+	psuError: 'FF68F6', //undocumented message, observed in logs
 }
 
 export const respParam = {

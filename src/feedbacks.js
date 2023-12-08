@@ -65,5 +65,26 @@ module.exports = async function (self) {
 				return options.caution == self.recorder.caution
 			},
 		},
+		psu: {
+			name: 'PSU State',
+			type: 'boolean',
+			label: 'PSU State',
+			defaultStyle: {
+				bgcolor: combineRgb(255, 0, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [
+				{
+					id: 'psu',
+					type: 'dropdown',
+					label: 'PSU',
+					choices: self.psuError_feedback,
+					default: '0701',
+				},
+			],
+			callback: ({ options }) => {
+				return options.psu == self.recorder.psuError
+			},
+		},
 	})
 }

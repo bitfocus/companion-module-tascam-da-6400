@@ -65,6 +65,7 @@ class TASCAM_DA_6400 extends InstanceBase {
 			playMode: 'unknown',
 			error: 'unknown',
 			caution: 'unknown',
+			psuError: false,
 		}
 	}
 

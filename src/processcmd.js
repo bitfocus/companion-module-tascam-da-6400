@@ -12,6 +12,9 @@ module.exports = {
 			case resp.loginSuccess:
 				this.updateStatus('ok', 'Logged in')
 				this.log('info', 'OK: Logged In')
+				this.addCmdtoQueue(SOM + cmd.errorSense)
+				this.addCmdtoQueue(SOM + cmd.cautionSense)
+				this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
 				return true
 		}
 		while (reply[0] != SOM && reply.length > 0) {
@@ -97,6 +100,7 @@ module.exports = {
 						//Shouldn't occur
 						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
 				}
+				this.log('warn', `errorSenseReturn: Param: ${param[0]}`)
 				this.recorder.error = param[0]
 				this.checkFeedbacks('error')
 				break
@@ -163,6 +167,7 @@ module.exports = {
 						//Shouldn't occur
 						this.log('warn', `caustionSenseReturn: Switch Default: ${param[0]}`)
 				}
+				this.log('warn', `caustionSenseReturn: Param: ${param[0]}`)
 				this.recorder.caution = param[0]
 				this.checkFeedbacks('caution')
 				break
@@ -256,7 +261,12 @@ module.exports = {
 					case resp.takeCopyAck:
 						this.log('debug', `takeCopyAck`)
 						break
+					case resp.psuError:
+						this.recorder.psuError = reply.substr(7, 4)
+						this.checkFeedbacks('psu')
+						break
 					default:
+						this.log('debug', `unknown vender command: ${reply}`)
 				}
 				break
 			default:

@@ -225,4 +225,8 @@ module.exports = {
 		{ id: '1-1E', label: 'Play Error' },
 		{ id: '1-FF', label: 'Other Caution' },
 	],
+	psuError_feedback: [
+		{ id: '0701', label: 'PSU Fault' },
+		{ id: '0700', label: 'PSU OK' },
+	],
 }

@@ -49,6 +49,7 @@ Enter the IP address, port and password of the recorder.
 - **Mecha Status**
 - **Caution**
 - **Error**
+- **PSU Error**
 
 ## Version History
 
