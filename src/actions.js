@@ -288,7 +288,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.clockMasterSelect_mode,
-					default: '25',
+					default: '00',
 				},
 			],
 			callback: async ({ options }) => {
