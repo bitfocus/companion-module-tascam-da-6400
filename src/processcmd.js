@@ -220,12 +220,16 @@ module.exports = {
 					case resp.pauseModeReturn:
 						break
 					case resp.timeIntervalMarkerTimeReturn:
+						this.log('debug', `timeIntervalMarkerTimeReturn`)
 						break
 					case resp.audioMarkerReturn:
+						this.log('debug', `audioMarkerReturn`)
 						break
 					case resp.timeIntervalMarkerReturn:
+						this.log('debug', `timeIntervalMarkerReturn`)
 						break
 					case resp.syncUnlockMarkerReturn:
+						this.log('debug', `syncUnlockMarkerReturn`)
 						break
 					case resp.recFsReturn:
 						break
