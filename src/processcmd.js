@@ -100,7 +100,6 @@ module.exports = {
 						//Shouldn't occur
 						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
 				}
-				this.log('warn', `errorSenseReturn: Param: ${param[0]}`)
 				this.recorder.error = param[0]
 				this.checkFeedbacks('error')
 				break
@@ -109,65 +108,64 @@ module.exports = {
 				switch (param[0]) {
 					case '0-00':
 						//no caution
-						this.log('info', `caustionSenseReturn: No Caution`)
+						this.log('info', `cautionSenseReturn: No Caution`)
 						break
 					case '0-01':
 						//Media Error
-						this.log('warn', `caustionSenseReturn: Media Error`)
+						this.log('warn', `cautionSenseReturn: Media Error`)
 						break
 					case '1-06':
 						//Media Full
-						this.log('warn', `caustionSenseReturn: Media Full`)
+						this.log('warn', `cautionSenseReturn: Media Full`)
 						break
 					case '1-07':
 						//Take Full
-						this.log('warn', `caustionSenseReturn: Take Full`)
+						this.log('warn', `cautionSenseReturn: Take Full`)
 						break
 					case '1-09':
 						//Digital Unlock
-						this.log('warn', `caustionSenseReturn: Digital Unlock`)
+						this.log('warn', `cautionSenseReturn: Digital Unlock`)
 						break
 					case '1-0B':
 						//Can't REC
-						this.log('warn', `caustionSenseReturn: Can't REC`)
+						this.log('warn', `cautionSenseReturn: Can't REC`)
 						break
 					case '1-0C':
 						//Write Protected
-						this.log('warn', `caustionSenseReturn: Write Protected`)
+						this.log('warn', `cautionSenseReturn: Write Protected`)
 						break
 					case '1-0D':
 						//Not Execute
-						this.log('warn', `caustionSenseReturn: Not Execute`)
+						this.log('warn', `cautionSenseReturn: Not Execute`)
 						break
 					case '1-0F':
 						//Can't Edit
-						this.log('warn', `caustionSenseReturn: Can't Edit`)
+						this.log('warn', `cautionSenseReturn: Can't Edit`)
 						break
 					case '1-13':
 						//Can't Select
-						this.log('warn', `caustionSenseReturn: Can't Select`)
+						this.log('warn', `cautionSenseReturn: Can't Select`)
 						break
 					case '1-14':
 						//Track Protected
-						this.log('warn', `caustionSenseReturn: Track Protected`)
+						this.log('warn', `cautionSenseReturn: Track Protected`)
 						break
 					case '1-16':
 						//Name Full
-						this.log('warn', `caustionSenseReturn: Name Full`)
+						this.log('warn', `cautionSenseReturn: Name Full`)
 						break
 					case '1-1E':
 						//Play Error
-						this.log('warn', `caustionSenseReturn: Play Error`)
+						this.log('warn', `cautionSenseReturn: Play Error`)
 						break
 					case '1-FF':
 						//Other Caution
-						this.log('warn', `caustionSenseReturn: Other Caution`)
+						this.log('warn', `cautionSenseReturn: Other Caution`)
 						break
 					default:
 						//Shouldn't occur
-						this.log('warn', `caustionSenseReturn: Switch Default: ${param[0]}`)
+						this.log('warn', `cautionSenseReturn: Switch Default: ${param[0]}`)
 				}
-				this.log('warn', `caustionSenseReturn: Param: ${param[0]}`)
 				this.recorder.caution = param[0]
 				this.checkFeedbacks('caution')
 				break

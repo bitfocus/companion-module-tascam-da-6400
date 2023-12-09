@@ -194,7 +194,7 @@ module.exports = {
 		{ id: '00', label: 'No Media' },
 		{ id: '10', label: 'Stop' },
 		{ id: '11', label: 'Play' },
-		{ id: '12', label: 'Ready On' },
+		{ id: '12', label: 'Ready On (Pause)' },
 		{ id: '28', label: 'Cue' },
 		{ id: '29', label: 'Review' },
 		{ id: '81', label: 'Record' },
