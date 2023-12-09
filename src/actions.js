@@ -459,7 +459,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.fileNameSelect_mode,
-					default: '480000',
+					default: '00',
 				},
 			],
 			callback: async ({ options }) => {
