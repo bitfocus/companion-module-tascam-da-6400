@@ -61,7 +61,7 @@ export const cmd = {
 	maxFileSizeSelect: '7F0823',
 	pauseModeSelect: '7F0824',
 	userWordSelect: '7F082A',
-	timeInternalMarkerTimePreset: '7F0832',
+	timeIntervalMarkerTimePreset: '7F0832',
 	audioOverMarketSelect: '7F0841',
 	timeInternalMarkerSelect: '7F0842',
 	syncUnlockMarkerSelect: '7F0843',

@@ -141,7 +141,7 @@ module.exports = function (self) {
 			//learn: async () => {},
 			//subscribe: async () => {},
 		},
-		currentTrackTime: {
+		/* 	currentTrackTime: {
 			name: 'Current Track Time',
 			description: 'Current Track Time',
 			options: [
@@ -158,9 +158,9 @@ module.exports = function (self) {
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
-		},
+		}, */
 		markSet: {
-			name: 'Mark Set',
+			name: 'Mark - Set',
 			description: 'Mark Set',
 			options: [],
 			callback: async () => {
@@ -387,6 +387,33 @@ module.exports = function (self) {
 			//learn: async () => {},
 			//subscribe: async () => {},
 		},
+		timeIntervalMarkerTimePreset: {
+			name: 'Timer Interval Marker Time',
+			description: 'This sets the TIME INTERVAL MARKER TIME of the controlled device',
+			options: [
+				{
+					type: 'textinput',
+					id: 'interval',
+					label: 'Time Interval (minutes)',
+					default: '0060',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let interval = await self.parseVariblesInString(options.interval)
+				if (interval.length != 4 || isNaN(interval)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${interval}`)
+					return undefined
+				}
+				self.addCmdtoQueue(
+					SOM + cmd.timeIntervalMarkerTimePreset + interval[2] + interval[3] + interval[0] + interval[1]
+				)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
 		syncUnlockMarker: {
 			name: 'Sync Unlock Marker',
 			description: 'Sync Unlock Marker',
@@ -551,6 +578,163 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + options.mode)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		directMarkSkipPrest: {
+			name: 'Mark - Direct Skip Preset',
+			description: 'Skip to Mark Number',
+			options: [
+				{
+					type: 'textinput',
+					id: 'mark',
+					label: 'Mark',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let mark = await self.parseVariblesInString(options.mark)
+				if (mark.length != 4 || isNaN(mark)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${mark}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.markDirectSkipPreset + mark[2] + mark[3] + mark[0] + mark[1])
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		markDelete: {
+			name: 'Mark - Delete',
+			description: 'Delete Mark Number',
+			options: [
+				{
+					type: 'textinput',
+					id: 'mark',
+					label: 'Mark',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let mark = await self.parseVariblesInString(options.mark)
+				if (mark.length != 4 || isNaN(mark)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${mark}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.markDelete + mark[2] + mark[3] + mark[0] + mark[1])
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		takeErase: {
+			name: 'Take Erase',
+			description: 'Erase a specified take in the current project on the controlled unit.',
+			options: [
+				{
+					type: 'textinput',
+					id: 'take',
+					label: 'Take',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let take = await self.parseVariblesInString(options.take)
+				if (take.length != 4 || isNaN(take)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${take}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.takeErase + take[2] + take[3] + take[0] + take[1])
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		directTrackSearchPreset: {
+			name: 'Direct Track Search Preset',
+			description: 'Specify a take number to search for it directly.',
+			options: [
+				{
+					type: 'textinput',
+					id: 'take',
+					label: 'Take',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+				{
+					type: 'dropdown',
+					id: 'mode',
+					label: 'Mode after search',
+					choices: self.directTrackSearchPreset_mode,
+					default: '10',
+				},
+			],
+			callback: async ({ options }) => {
+				let take = await self.parseVariblesInString(options.take)
+				if (take.length != 4 || isNaN(take)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${take}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.takeErase + take[2] + take[3] + take[0] + take[1] + options.mode)
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		projectSelect: {
+			name: 'Project - Select',
+			description: 'Specify the project number to change the current project.',
+			options: [
+				{
+					type: 'textinput',
+					id: 'project',
+					label: 'Project',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let project = await self.parseVariblesInString(options.project)
+				if (project.length != 4 || isNaN(project)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${project}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.projectSelect + project[2] + project[3] + project[0] + project[1])
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		projectDelete: {
+			name: 'Project - Delete',
+			description: 'This deletes a project.',
+			options: [
+				{
+					type: 'textinput',
+					id: 'project',
+					label: 'Project',
+					default: '0001',
+					regex: '/^[0-9]{4}/g',
+					useVariables: true,
+					tooltip: 'Must be a four digit integer',
+				},
+			],
+			callback: async ({ options }) => {
+				let project = await self.parseVariblesInString(options.project)
+				if (project.length != 4 || isNaN(project)) {
+					self.log('warn', `varible passed must be a 4 digit integer: ${project}`)
+					return undefined
+				}
+				self.addCmdtoQueue(SOM + cmd.projectSelect + '0000' + project[2] + project[3] + project[0] + project[1])
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},

@@ -190,6 +190,11 @@ module.exports = {
 		{ id: '20', label: 'Reference Level -20dB' },
 		{ id: 'FF', label: 'Sense' },
 	],
+	directTrackSearchPreset_mode: [
+		{ id: '10', label: 'Stop' },
+		{ id: '12', label: 'Play' },
+		{ id: '14', label: 'Pause' },
+	],
 	mechaStatus_feedback: [
 		{ id: '00', label: 'No Media' },
 		{ id: '10', label: 'Stop' },

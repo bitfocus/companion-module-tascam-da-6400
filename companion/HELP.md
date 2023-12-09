@@ -17,8 +17,11 @@ Enter the IP address, port and password of the recorder.
 - **Repeat Mode**
 - **Remote/Local Select**
 - **Play Mode Select**
-- **Mark Set**
-- **Current Track Time**
+- **Mark - Delete**
+- **Mark - Set**
+- **Mark - Direct Skip Preset**
+- **Project Delete**
+- **Project Select**
 - **Project Skip**
 - **Rebuild Project**
 - **Chase Select**
@@ -31,6 +34,7 @@ Enter the IP address, port and password of the recorder.
 - **Pause Mode**
 - **Audio Over Marker**
 - **Time Interval Marker**
+- **Time Interval Marker Time**
 - **Sync Unlock Marker**
 - **REC FS Select**
 - **File Name Select**
@@ -40,6 +44,8 @@ Enter the IP address, port and password of the recorder.
 - **Meter Peak Hold Time**
 - **Meter Peak Clear**
 - **Digital Reference Level**
+- **Take Erase**
+- **Direct Track Search Preset**
 
 
 ## Variables
