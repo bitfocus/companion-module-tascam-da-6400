@@ -26,6 +26,7 @@ module.exports = {
 		let response = reply.substr(1, 2)
 		let venderCmd = reply.substr(1, 6)
 		let param = []
+		let varList = []
 		switch (response) {
 			case resp.keepAlive:
 				this.log('debug', `keepAlive`)
@@ -42,6 +43,10 @@ module.exports = {
 				this.checkFeedbacks('mechaStatus')
 				break
 			case resp.trackNoStatusReturn:
+				param[0] = parseInt(reply[7] + reply[8] + reply[5] + reply[6])
+				this.recorder.track.number = isNaN(param[0]) ? this.recorder.track.number : param[0]
+				varList['trackNo'] = this.recorder.track.number
+				this.setVariableValues(varList)
 				break
 			case resp.trackCurrentInfoReturn:
 				break
@@ -71,6 +76,7 @@ module.exports = {
 					this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
 				} else if (param[0] == '03') {
 					//take number changed
+					this.addCmdtoQueue(SOM + cmd.trackNumStatusSense)
 				}
 				break
 			case resp.errorSenseReturn:
