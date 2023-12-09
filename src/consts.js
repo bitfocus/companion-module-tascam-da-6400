@@ -163,3 +163,5 @@ export const respParam = {
 		other: 'FF',
 	},
 }
+
+export const cmdOnLogin = [cmd.errorSense, cmd.cautionSense, cmd.mechaStatusSense]

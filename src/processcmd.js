@@ -1,4 +1,4 @@
-const { resp, cmd, SOM } = require('./consts.js')
+const { resp, cmd, SOM, cmdOnLogin } = require('./consts.js')
 
 module.exports = {
 	async processCmd(chunk) {
@@ -12,9 +12,9 @@ module.exports = {
 			case resp.loginSuccess:
 				this.updateStatus('ok', 'Logged in')
 				this.log('info', 'OK: Logged In')
-				this.addCmdtoQueue(SOM + cmd.errorSense)
-				this.addCmdtoQueue(SOM + cmd.cautionSense)
-				this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
+				for (let i = 0; i < cmdOnLogin.length; i++) {
+					this.addCmdtoQueue(SOM + cmdOnLogin[i])
+				}
 				return true
 		}
 		while (reply[0] != SOM && reply.length > 0) {
