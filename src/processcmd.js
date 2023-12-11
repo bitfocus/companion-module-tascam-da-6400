@@ -4,7 +4,6 @@ module.exports = {
 	async processCmd(chunk) {
 		let reply = chunk.toString()
 		this.log('debug', `response recieved: ${reply}`)
-		//let varList = []
 		switch (reply) {
 			case resp.password:
 				this.addCmdtoQueue(this.config.password)
