@@ -11,7 +11,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/phillipivan/companion-module-tascam-da-6400.git"
+		"url": "git+https://github.com/bitfocus/companion-module-tascam-da-6400.git"
 	},
 	"dependencies": {
 		"@companion-module/base": "~1.5.1"

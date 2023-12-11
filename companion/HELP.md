@@ -59,5 +59,5 @@ Enter the IP address, port and password of the recorder.
 
 ## Version History
 
-### Version 0.8.0
-- W.I.P.
+### Version 1.0.0
+- Initiail release
