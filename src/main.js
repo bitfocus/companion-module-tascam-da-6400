@@ -47,6 +47,8 @@ class TASCAM_DA_6400 extends InstanceBase {
 	updateVariableValues() {
 		let varList = []
 		varList['trackNo'] = 'unknown'
+		varList['error'] = 'unknown'
+		varList['caution'] = 'unknown'
 		this.setVariableValues(varList)
 	}
 

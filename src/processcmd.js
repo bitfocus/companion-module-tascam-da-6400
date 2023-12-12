@@ -82,31 +82,38 @@ module.exports = {
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
 				switch (param[0]) {
 					case '0-00':
-						this.log('info', `errorSenseReturn: No Error`)
 						//no error
+						this.log('info', `errorSenseReturn: No Error`)
+						varList['error'] = 'No Error'
 						break
 					case '0-01':
 						//rec error
 						this.log('warn', `errorSenseReturn: Record Error`)
+						varList['error'] = 'Record Error'
 						break
 					case '1-02':
 						//device error
 						this.log('warn', `errorSenseReturn: Device Error`)
+						varList['error'] = 'Device Error'
 						break
 					case '1-09':
 						//info write error
 						this.log('warn', `errorSenseReturn: Infomation Write Error`)
+						varList['error'] = 'Infomation Write Error'
 						break
 					case '1-FF':
 						//Other Error
 						this.log('warn', `errorSenseReturn: Other Error`)
+						varList['error'] = 'Other Error'
 						break
 					default:
 						//Shouldn't occur
 						this.log('warn', `errorSenseReturn: Switch Default: ${param[0]}`)
+						varList['error'] = 'Default Error'
 				}
 				this.recorder.error = param[0]
 				this.checkFeedbacks('error')
+				this.setVariableValues(varList)
 				break
 			case resp.cautionSenseReturn:
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
@@ -114,65 +121,81 @@ module.exports = {
 					case '0-00':
 						//no caution
 						this.log('info', `cautionSenseReturn: No Caution`)
+						varList['caution'] = 'No Caution'
 						break
 					case '0-01':
 						//Media Error
 						this.log('warn', `cautionSenseReturn: Media Error`)
+						varList['caution'] = 'Media Error'
 						break
 					case '1-06':
 						//Media Full
 						this.log('warn', `cautionSenseReturn: Media Full`)
+						varList['caution'] = 'Media Full'
 						break
 					case '1-07':
 						//Take Full
 						this.log('warn', `cautionSenseReturn: Take Full`)
+						varList['caution'] = 'Take Full'
 						break
 					case '1-09':
 						//Digital Unlock
 						this.log('warn', `cautionSenseReturn: Digital Unlock`)
+						varList['caution'] = 'Digital Unlock'
 						break
 					case '1-0B':
 						//Can't REC
 						this.log('warn', `cautionSenseReturn: Can't REC`)
+						varList['caution'] = "Can't REC"
 						break
 					case '1-0C':
 						//Write Protected
 						this.log('warn', `cautionSenseReturn: Write Protected`)
+						varList['caution'] = 'Write Protected'
 						break
 					case '1-0D':
 						//Not Execute
 						this.log('warn', `cautionSenseReturn: Not Execute`)
+						varList['caution'] = 'Not Execute'
 						break
 					case '1-0F':
 						//Can't Edit
 						this.log('warn', `cautionSenseReturn: Can't Edit`)
+						varList['caution'] = "Can't Edit"
 						break
 					case '1-13':
 						//Can't Select
 						this.log('warn', `cautionSenseReturn: Can't Select`)
+						varList['caution'] = "Can't Select"
 						break
 					case '1-14':
 						//Track Protected
 						this.log('warn', `cautionSenseReturn: Track Protected`)
+						varList['caution'] = 'Track Protected'
 						break
 					case '1-16':
 						//Name Full
 						this.log('warn', `cautionSenseReturn: Name Full`)
+						varList['caution'] = 'Name Full'
 						break
 					case '1-1E':
 						//Play Error
 						this.log('warn', `cautionSenseReturn: Play Error`)
+						varList['caution'] = 'Play Error'
 						break
 					case '1-FF':
 						//Other Caution
 						this.log('warn', `cautionSenseReturn: Other Caution`)
+						varList['caution'] = 'Other Caution'
 						break
 					default:
 						//Shouldn't occur
 						this.log('warn', `cautionSenseReturn: Switch Default: ${param[0]}`)
+						varList['caution'] = 'Default Caution'
 				}
 				this.recorder.caution = param[0]
 				this.checkFeedbacks('caution')
+				this.setVariableValues(varList)
 				break
 			case resp.venderCommandReturn:
 				switch (venderCmd) {
