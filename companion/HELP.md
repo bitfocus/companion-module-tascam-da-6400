@@ -52,9 +52,9 @@ Enter the IP address, port and password of the recorder.
 - **Track Number**
 
 ## Feedbacks
-- **Mecha Status**
 - **Caution**
 - **Error**
+- **Mecha Status**
 - **PSU Error**
 
 ## Version History
