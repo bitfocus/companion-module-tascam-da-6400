@@ -1,6 +1,5 @@
-//export const regexpAddr = new RegExp(/^.{0,6}[^.*,`"]$/g)
 export const msgDelay = 20 // Always leave at least 20 ms open between commands
-export const keepAliveInterval = 60000
+export const keepAliveInterval = 200
 export const SOM = '0'
 export const EOM = '\r\n'
 export const EndSession = 'exit'

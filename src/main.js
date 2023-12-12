@@ -71,6 +71,8 @@ class TASCAM_DA_6400 extends InstanceBase {
 			psuError: false,
 			track: {
 				number: 'unknown',
+				time: 'unknown',
+				currentTrackTimeSense: '10',
 			},
 		}
 	}

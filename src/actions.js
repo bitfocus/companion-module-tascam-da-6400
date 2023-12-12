@@ -141,7 +141,7 @@ module.exports = function (self) {
 			//learn: async () => {},
 			//subscribe: async () => {},
 		},
-		/* 	currentTrackTime: {
+		currentTrackTime: {
 			name: 'Current Track Time',
 			description: 'Current Track Time',
 			options: [
@@ -154,11 +154,12 @@ module.exports = function (self) {
 				},
 			],
 			callback: async ({ options }) => {
+				self.recorder.track.currentTrackTimeSense = options.mode
 				self.addCmdtoQueue(SOM + cmd.currentTrackTimeSense + options.mode)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
-		}, */
+		},
 		markSet: {
 			name: 'Mark - Set',
 			description: 'Mark Set',

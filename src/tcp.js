@@ -43,7 +43,7 @@ module.exports = {
 
 	keepAlive() {
 		//request alive notifications
-		this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
+		this.addCmdtoQueue(SOM + cmd.currentTrackTimeSense + this.recorder.track.currentTrackTimeSense)
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)

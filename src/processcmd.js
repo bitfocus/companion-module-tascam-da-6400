@@ -48,8 +48,17 @@ module.exports = {
 				this.setVariableValues(varList)
 				break
 			case resp.trackCurrentInfoReturn:
+				param[0] = parseInt(reply[5] + reply[6] + reply[3] + reply[4])
+				this.recorder.track.time = `${reply[7]}${reply[8]}:${reply[9]}${reply[10]}:${reply[11]}${reply[12]}:${reply[13]}${reply[14]}`
+				this.recorder.track.number = isNaN(param[0]) ? this.recorder.track.number : param[0]
+				varList['trackNo'] = this.recorder.track.number
+				varList['trackTime'] = this.recorder.track.time
+				this.setVariableValues(varList)
 				break
 			case resp.trackCurrentTimeReturn:
+				this.recorder.track.time = `${reply[5]}${reply[6]}:${reply[7]}${reply[8]}:${reply[9]}${reply[10]}:${reply[11]}${reply[12]}`
+				varList['trackTime'] = this.recorder.track.time
+				this.setVariableValues(varList)
 				break
 			case resp.titleReturn:
 				break
