@@ -63,5 +63,5 @@ Enter the IP address, port and password of the recorder.
 
 ## Version History
 
-### Version 1.0.1
+### Version 1.0.2
 - Initial release
