@@ -50,7 +50,10 @@ Enter the IP address, port and password of the recorder.
 
 
 ## Variables
+- **Caution Status**
+- **Error Status**
 - **Track Number**
+- **Track Time**
 
 ## Feedbacks
 - **Caution**
