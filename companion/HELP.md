@@ -46,6 +46,7 @@ Enter the IP address, port and password of the recorder.
 - **Digital Reference Level**
 - **Take Erase**
 - **Direct Track Search Preset**
+- **Record Function**
 
 
 ## Variables
