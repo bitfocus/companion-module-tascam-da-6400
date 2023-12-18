@@ -778,7 +778,7 @@ module.exports = function (self) {
 				if (options.all) {
 					msg += options.on ? '00001' : '00000'
 				} else {
-					msg += '6400'
+					msg += '0100'
 					for (let i = 1; i <= 64; i++) {
 						if (tracks.includes(i)) {
 							msg += '1'
