@@ -747,7 +747,7 @@ module.exports = function (self) {
 				{
 					id: 'all',
 					type: 'checkbox',
-					label: 'All Channels',
+					label: 'All Tracks',
 					default: false,
 				},
 				{
@@ -766,7 +766,7 @@ module.exports = function (self) {
 					choices: self.recordFunctionSelect_tracks,
 					minSelection: 0,
 					maxSelection: 64,
-					tooltip: 'Select track to arm record function.',
+					tooltip: 'Select track to arm record function. Unselected tracks are disarmed.',
 					isVisible: (options) => {
 						return options.all === false
 					},
