@@ -46,9 +46,12 @@ Enter the IP address, port and password of the recorder.
 - **Digital Reference Level**
 - **Take Erase**
 - **Direct Track Search Preset**
+- **Record Function**
 
 
 ## Variables
+- **Caution Status**
+- **Error Status**
 - **Track Number**
 - **Track Time**
 - **Track Time: Hours**

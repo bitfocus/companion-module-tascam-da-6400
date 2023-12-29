@@ -325,7 +325,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.bitLengthSelect_mode,
-					default: '00',
+					default: '24',
 				},
 			],
 			callback: async ({ options }) => {
@@ -736,6 +736,58 @@ module.exports = function (self) {
 					return undefined
 				}
 				self.addCmdtoQueue(SOM + cmd.projectSelect + '0000' + project[2] + project[3] + project[0] + project[1])
+			},
+			//learn: async () => {},
+			//subscribe: async () => {},
+		},
+		recordFunction: {
+			name: 'Record Function',
+			description: 'Enable Record Function',
+			options: [
+				{
+					id: 'all',
+					type: 'checkbox',
+					label: 'All Tracks',
+					default: false,
+				},
+				{
+					id: 'on',
+					type: 'checkbox',
+					label: 'On / Off',
+					default: false,
+					isVisible: (options) => {
+						return options.all
+					},
+				},
+				{
+					type: 'multidropdown',
+					id: 'track',
+					label: 'Tracks',
+					choices: self.recordFunctionSelect_tracks,
+					minSelection: 0,
+					maxSelection: 64,
+					tooltip: 'Select track to arm record function. Unselected tracks are disarmed.',
+					isVisible: (options) => {
+						return options.all === false
+					},
+				},
+			],
+			callback: ({ options }) => {
+				let tracks = options.track
+				let msg = SOM + cmd.recordFunctionSelect
+				if (options.all) {
+					msg += options.on ? '00001' : '00000'
+				} else {
+					msg += '0100'
+					for (let i = 1; i <= 64; i++) {
+						if (tracks.includes(i)) {
+							msg += '1'
+						} else {
+							msg += '0'
+						}
+					}
+				}
+				self.addCmdtoQueue(msg)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
