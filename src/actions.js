@@ -780,11 +780,7 @@ module.exports = function (self) {
 				} else {
 					msg += '0100'
 					for (let i = 1; i <= 64; i++) {
-						if (tracks.includes(i)) {
-							msg += '1'
-						} else {
-							msg += '0'
-						}
+						msg += tracks.includes(i) ? '1' : '0'
 					}
 				}
 				self.addCmdtoQueue(msg)
