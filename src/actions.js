@@ -5,7 +5,7 @@ module.exports = function (self) {
 	self.setActionDefinitions({
 		stop: {
 			name: 'Stop',
-			description: 'Stop',
+			description: 'This stops the controlled device.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.stop)
@@ -15,7 +15,7 @@ module.exports = function (self) {
 		},
 		play: {
 			name: 'Play',
-			description: 'Play',
+			description: 'This starts controlled device playback.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.play)
@@ -25,7 +25,7 @@ module.exports = function (self) {
 		},
 		record: {
 			name: 'Record',
-			description: 'Record',
+			description: 'This puts the controlled device into recording or recording standby status.',
 			options: [
 				{
 					type: 'dropdown',
@@ -43,7 +43,7 @@ module.exports = function (self) {
 		},
 		pause: {
 			name: 'Pause',
-			description: 'Pause',
+			description: 'This pauses playback of the controlled device.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.pause + '01')
@@ -53,7 +53,7 @@ module.exports = function (self) {
 		},
 		search: {
 			name: 'Search',
-			description: 'Search',
+			description: 'This starts search playback on the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -71,7 +71,7 @@ module.exports = function (self) {
 		},
 		skip: {
 			name: 'Skip',
-			description: 'Skip',
+			description: 'This skips on the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -89,7 +89,7 @@ module.exports = function (self) {
 		},
 		repeatMode: {
 			name: 'Repeat Mode',
-			description: 'Repeat Mode',
+			description: 'This sets the repeat mode of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -107,7 +107,7 @@ module.exports = function (self) {
 		},
 		remoteLocalMode: {
 			name: 'Remote/Local Select',
-			description: 'Remote/Local Select',
+			description: 'Set whether operations using the controlled device itself are enabled or disabled.',
 			options: [
 				{
 					type: 'dropdown',
@@ -125,7 +125,7 @@ module.exports = function (self) {
 		},
 		playMode: {
 			name: 'Play Mode Select',
-			description: 'Play Mode Select',
+			description: 'This sets the play mode of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -143,7 +143,8 @@ module.exports = function (self) {
 		},
 		currentTrackTime: {
 			name: 'Current Track Time',
-			description: 'Current Track Time',
+			description:
+				'This requests that time information about the current take (or take being recorded) be returned. (Hour, minute, second, frame)',
 			options: [
 				{
 					type: 'dropdown',
@@ -162,7 +163,7 @@ module.exports = function (self) {
 		},
 		markSet: {
 			name: 'Mark - Set',
-			description: 'Mark Set',
+			description: 'This sets a mark on the controlled device.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.markSet)
@@ -172,7 +173,7 @@ module.exports = function (self) {
 		},
 		projectSkip: {
 			name: 'Project Skip',
-			description: 'Project Skip',
+			description: 'This changes the project.',
 			options: [
 				{
 					type: 'dropdown',
@@ -190,7 +191,7 @@ module.exports = function (self) {
 		},
 		rebuildProject: {
 			name: 'Rebuild Project',
-			description: 'Rebuild Project',
+			description: 'This rebuilds the current project/session.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.projectRebuild)
@@ -200,7 +201,7 @@ module.exports = function (self) {
 		},
 		chaseSelect: {
 			name: 'Chase Select',
-			description: 'Chase Select',
+			description: 'This turns the chase mode of the controlled device on/off.',
 			options: [
 				{
 					type: 'dropdown',
@@ -218,7 +219,7 @@ module.exports = function (self) {
 		},
 		tcRestart: {
 			name: 'TC Restart',
-			description: 'Timecode Restart',
+			description: 'This restarts the controlled device TC GENERATOR from the START TIME.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.tcRestart)
@@ -228,7 +229,7 @@ module.exports = function (self) {
 		},
 		tcGeneratorModeSelect: {
 			name: 'TC Generator Mode',
-			description: 'TC Generator Mode',
+			description: 'This sets the TC GENERATOR mode of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -246,7 +247,7 @@ module.exports = function (self) {
 		},
 		tcFrameTypeSelect: {
 			name: 'TC Frame Type',
-			description: 'TC Frame Type',
+			description: 'This sets the TC FRAME TYPE of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -264,7 +265,7 @@ module.exports = function (self) {
 		},
 		tcOutputModeSelect: {
 			name: 'TC Output Mode',
-			description: 'TC Output Mode',
+			description: 'This sets the TC mode output by the TC output connector of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -282,7 +283,7 @@ module.exports = function (self) {
 		},
 		clockMasterSelect: {
 			name: 'Clock Master Select',
-			description: 'Clock Master Select',
+			description: 'Set the master clock of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -300,7 +301,7 @@ module.exports = function (self) {
 		},
 		wordThruSelect: {
 			name: 'Word Thru Select',
-			description: 'Word Clock Out/Through/Term Select',
+			description: 'This sets the WORD/VIDEO SETUP of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -318,7 +319,7 @@ module.exports = function (self) {
 		},
 		bitLengthSelect: {
 			name: 'Bit Length Select',
-			description: 'Bit Length Select',
+			description: 'This sets the bit length used by the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -336,7 +337,7 @@ module.exports = function (self) {
 		},
 		pauseModeSelect: {
 			name: 'Pause Mode',
-			description: 'Pause Mode',
+			description: 'This sets the PAUSE mode of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -354,7 +355,7 @@ module.exports = function (self) {
 		},
 		audioOverMarker: {
 			name: 'Audio Over Marker',
-			description: 'Audio Over Marker',
+			description: 'This sets the AUDIO OVER MARKER of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -372,7 +373,7 @@ module.exports = function (self) {
 		},
 		timeIntervalMarker: {
 			name: 'Time Interval Marker',
-			description: 'Time Interval Marker',
+			description: 'This sets the TIME INTERVAL MARKER of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -417,7 +418,7 @@ module.exports = function (self) {
 		},
 		syncUnlockMarker: {
 			name: 'Sync Unlock Marker',
-			description: 'Sync Unlock Marker',
+			description: 'This sets the SYNC UNLOCK MARKER of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -435,7 +436,7 @@ module.exports = function (self) {
 		},
 		recFsSelect: {
 			name: 'REC FS Select',
-			description: 'Select recording sample rate',
+			description: 'This sets the REC FS used by the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -453,7 +454,7 @@ module.exports = function (self) {
 		},
 		fileNameSelect: {
 			name: 'File Name Select',
-			description: 'File Name Select',
+			description: 'This sets the FILE NAME used by the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -489,7 +490,7 @@ module.exports = function (self) {
 		},
 		auxAssignKeySelect: {
 			name: 'Aux Assign Key',
-			description: 'Aux Assign Key',
+			description: 'This sets the AUX KEY ASSIGN of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -514,7 +515,7 @@ module.exports = function (self) {
 		},
 		auxAssignKeyTally: {
 			name: 'Aux Assign Key Tally',
-			description: 'Aux Assign Key Tally',
+			description: 'This sets the AUX TALLY ASSIGN of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -539,7 +540,7 @@ module.exports = function (self) {
 		},
 		meterPeakHoldTime: {
 			name: 'Meter Peak Hold Time',
-			description: 'Meter Peak Hold Time',
+			description: 'This sets the METER PEAK HOLD TIME used by the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -557,7 +558,7 @@ module.exports = function (self) {
 		},
 		meterPeakClear: {
 			name: 'Meter Peak Clear',
-			description: 'Reset Peak Meters',
+			description: 'Clear meter peak holds on the controlled device.',
 			options: [],
 			callback: async () => {
 				self.addCmdtoQueue(SOM + cmd.meterPeakClear)
@@ -567,7 +568,7 @@ module.exports = function (self) {
 		},
 		digitalRefLevel: {
 			name: 'Digital Reference Level',
-			description: 'Digital Reference Level',
+			description: 'This sets the DIGITAL REFERENCE LEVEL used by the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -585,7 +586,7 @@ module.exports = function (self) {
 		},
 		directMarkSkipPrest: {
 			name: 'Mark - Direct Skip Preset',
-			description: 'Skip to Mark Number',
+			description: 'Specify a mark number to skip to it.',
 			options: [
 				{
 					type: 'textinput',
@@ -610,7 +611,7 @@ module.exports = function (self) {
 		},
 		markDelete: {
 			name: 'Mark - Delete',
-			description: 'Delete Mark Number',
+			description: 'Delete a mark on the controlled device.',
 			options: [
 				{
 					type: 'textinput',
@@ -742,7 +743,7 @@ module.exports = function (self) {
 		},
 		recordFunction: {
 			name: 'Record Function',
-			description: 'Enable Record Function',
+			description: 'This turns the record function of the controlled device on/off.',
 			options: [
 				{
 					id: 'all',
