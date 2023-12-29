@@ -23,7 +23,7 @@ module.exports = {
 			return false
 		}
 		let response = reply.substr(1, 2)
-		let venderCmd = reply.substr(1, 6)
+		let venderCmd = response == resp.venderCommandReturn ? reply.substr(1, 6) : null
 		let param = []
 		let varList = []
 		switch (response) {
@@ -53,11 +53,19 @@ module.exports = {
 				this.recorder.track.number = isNaN(param[0]) ? this.recorder.track.number : param[0]
 				varList['trackNo'] = this.recorder.track.number
 				varList['trackTime'] = this.recorder.track.time
+				varList['trackTimeHours'] = parseInt(`${reply[7]}${reply[8]}`)
+				varList['trackTimeMinutes'] = parseInt(`${reply[9]}${reply[10]}`)
+				varList['trackTimeSeconds'] = parseInt(`${reply[11]}${reply[12]}`)
+				varList['trackTimeFrames'] = parseInt(`${reply[13]}${reply[14]}`)
 				this.setVariableValues(varList)
 				break
 			case resp.trackCurrentTimeReturn:
 				this.recorder.track.time = `${reply[5]}${reply[6]}:${reply[7]}${reply[8]}:${reply[9]}${reply[10]}:${reply[11]}${reply[12]}`
 				varList['trackTime'] = this.recorder.track.time
+				varList['trackTimeHours'] = parseInt(`${reply[5]}${reply[6]}`)
+				varList['trackTimeMinutes'] = parseInt(`${reply[7]}${reply[8]}`)
+				varList['trackTimeSeconds'] = parseInt(`${reply[9]}${reply[10]}`)
+				varList['trackTimeFrames'] = parseInt(`${reply[11]}${reply[12]}`)
 				this.setVariableValues(varList)
 				break
 			case resp.titleReturn:
