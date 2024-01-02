@@ -3,6 +3,7 @@ export const keepAliveInterval = 200
 export const SOM = '0'
 export const EOM = '\r\n'
 export const EndSession = 'exit'
+export const sense = 'FF'
 export const cmd = {
 	infoReq: '0F',
 	stop: '10',
@@ -149,6 +150,19 @@ export const resp = {
 }
 
 export const respParam = {
+	repeatModeSelectReturn: {
+		off: '00',
+		normal: '01',
+		vamping: '21',
+	},
+	remoteLocalSelectReturn: {
+		remote: '00',
+		local: '01',
+	},
+	playModeReturn: {
+		allTake: '00',
+		oneTake: '01',
+	},
 	mechaStatusReturn: {
 		noMedia: '00',
 		stop: '10',
@@ -160,6 +174,202 @@ export const respParam = {
 		recordReady: '82',
 		infomationWriting: '83',
 		other: 'FF',
+	},
+	keyboardTypeReturn: {
+		japanese: '00',
+		english: '01',
+	},
+	errorSenseReturn: {
+		noError: '0-00',
+		recError: '1-01',
+		deviceError: '1-02',
+		infoWriteError: '1-09',
+		otherError: '1-FF',
+	},
+	cautionSenseReturn: {
+		noCaution: '0-00',
+		mediaError: '1-02',
+		mediaFull: '1-06',
+		takeFull: '1-07',
+		digitalUnlock: '1-09',
+		cantRec: '1-0B',
+		writeProtected: '1-0C',
+		notExecute: '1-0D',
+		cantEdit: '1-0F',
+		cantSelect: '1-13',
+		trackProtected: '1-14',
+		nameFull: '1-16',
+		playError: '1-1E',
+		otherCaution: '1-FF',
+	},
+	createProjectACK: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	rebuildProjectACK: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	deleteProjectACK: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	chaseReturn: {
+		off: '00',
+		on: '01',
+	},
+	tcGeneratorModeReturn: {
+		freeRun: '00',
+		freeOnce: '01',
+		timeOfDay: '02',
+		jamSync: '03',
+		regen: '04',
+		recRun: '05',
+		tcSyncRec: '06',
+	},
+	tcFrameTypeReturn: {
+		23976: '23',
+		24: '24',
+		25: '25',
+		DF2997: '29DF',
+		2997: '29',
+		DF30: '30DF',
+		30: '30',
+	},
+	tcOutputModeReturn: {
+		generator: '00',
+		play: '01',
+	},
+	clockMasterReturn: {
+		internal: '00',
+		word: '01',
+		video: '02',
+		slot1: '03',
+		slot2: '04',
+	},
+	wordThruReturn: {
+		wordOutTermOn: '00',
+		wordOutTermOff: '01',
+		wordThruTermOff: '11',
+	},
+	bitLengthReturn: {
+		16: '16',
+		24: '24',
+	},
+	pauseModeReturn: {
+		split: '00',
+		noSplit: '01',
+	},
+	audioOverMarkerReturn: {
+		off: '00',
+		on: '01',
+	},
+	timeIntervalMarkerReturn: {
+		off: '00',
+		on: '01',
+	},
+	syncUnlockMarkerReturn: {
+		off: '00',
+		on: '01',
+	},
+	recFsReturn: {
+		44: '440000',
+		48: '480000',
+		88: '880000',
+		96: '960000',
+	},
+	fileNameReturn: {
+		dateTime: '00',
+		folder: '01',
+		userWord: '11',
+	},
+	mediaFormatAck: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	auxAssignKeyReturn: {
+		key: {
+			1: '01',
+			2: '02',
+			3: '03',
+			4: '04',
+			5: '05',
+			6: '06',
+		},
+		mode: {
+			playPause: '00',
+			pause: '01',
+			rec: '02',
+			faderRec: '03',
+			faderStart: '04',
+			rew: '05',
+			ffwd: '06',
+			takeSkipBack: '07',
+			takeSkipFwd: '08',
+			markSkipBack: '09',
+			markSkipFwd: '0A',
+			takeMarkSkipBack: '0B',
+			takeMarkSkipFwd: '0C',
+			mark: '0D',
+		},
+	},
+	auxAssignTallyReturn: {
+		tally: {
+			1: '01',
+			2: '02',
+			3: '03',
+			4: '04',
+			5: '05',
+		},
+		mode: {
+			stop: '00',
+			play: '01',
+			pause: '02',
+			rec: '03',
+			eom: '04',
+			error: '05',
+			eomError: '06',
+		},
+	},
+	meterPeakTimeReturn: {
+		0: '00',
+		1: '01',
+		2: '02',
+		3: '03',
+		4: '04',
+		5: '05',
+		6: '06',
+		7: '07',
+		8: '08',
+		9: '09',
+		10: '10',
+		inf: 'FE',
+	},
+	digitalReferenceLevelReturn: {
+		9: '09',
+		14: '14',
+		16: '16',
+		18: '18',
+		20: '20',
+	},
+	takeRenameAck: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	takeEraseAck: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
+	},
+	takeCopyAck: {
+		start: '00',
+		endOK: '11',
+		endNG: '12',
 	},
 }
 

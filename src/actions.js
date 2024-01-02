@@ -1,5 +1,5 @@
 const { Regex } = require('@companion-module/base')
-const { SOM, cmd } = require('./consts.js')
+const { SOM, sense, cmd, respParam } = require('./consts.js')
 
 module.exports = function (self) {
 	self.setActionDefinitions({
@@ -96,14 +96,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.repeat_mode,
-					default: '00',
+					default: respParam.repeatModeSelectReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + sense)
+			},
 		},
 		remoteLocalMode: {
 			name: 'Remote/Local Select',
@@ -114,14 +116,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.remoteLocal_mode,
-					default: '00',
+					default: respParam.remoteLocalSelectReturn.remote,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + sense)
+			},
 		},
 		playMode: {
 			name: 'Play Mode Select',
@@ -132,7 +136,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.play_mode,
-					default: '00',
+					default: respParam.playModeReturn.allTake,
 				},
 			],
 			callback: async ({ options }) => {
@@ -208,14 +212,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.chase_mode,
-					default: '00',
+					default: respParam.chaseReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.chaseSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.chaseSelect + sense)
+			},
 		},
 		tcRestart: {
 			name: 'TC Restart',
@@ -236,14 +242,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.tcGeneratorSelect_mode,
-					default: '00',
+					default: respParam.tcGeneratorModeReturn.freeRun,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + sense)
+			},
 		},
 		tcFrameTypeSelect: {
 			name: 'TC Frame Type',
@@ -254,14 +262,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.tcFrameTypeSelect_mode,
-					default: '25',
+					default: respParam.tcFrameTypeReturn[25],
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + sense)
+			},
 		},
 		tcOutputModeSelect: {
 			name: 'TC Output Mode',
@@ -272,14 +282,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.tcOutputSelect_mode,
-					default: '25',
+					default: respParam.tcOutputModeReturn.generator,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
+			},
 		},
 		clockMasterSelect: {
 			name: 'Clock Master Select',
@@ -290,14 +302,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.clockMasterSelect_mode,
-					default: '00',
+					default: respParam.clockMasterReturn.internal,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
+			},
 		},
 		wordThruSelect: {
 			name: 'Word Thru Select',
@@ -308,14 +322,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.wordThruSelect_mode,
-					default: '00',
+					default: respParam.wordThruReturn.wordOutTermOn,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.wordThruSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.wordThruSelect + sense)
+			},
 		},
 		bitLengthSelect: {
 			name: 'Bit Length Select',
@@ -326,14 +342,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.bitLengthSelect_mode,
-					default: '24',
+					default: respParam.bitLengthReturn[24],
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + sense)
+			},
 		},
 		pauseModeSelect: {
 			name: 'Pause Mode',
@@ -344,14 +362,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.pause_mode,
-					default: '00',
+					default: respParam.pauseModeReturn.split,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + sense)
+			},
 		},
 		audioOverMarker: {
 			name: 'Audio Over Marker',
@@ -362,14 +382,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.audioOverMarketSelect_mode,
-					default: '00',
+					default: respParam.audioOverMarkerReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + sense)
+			},
 		},
 		timeIntervalMarker: {
 			name: 'Time Interval Marker',
@@ -380,14 +402,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.timeInternalMarkerSelect_mode,
-					default: '00',
+					default: respParam.timeIntervalMarkerReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + sense)
+			},
 		},
 		timeIntervalMarkerTimePreset: {
 			name: 'Timer Interval Marker Time',
@@ -425,14 +449,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.syncUnlockMarkerSelect_mode,
-					default: '00',
+					default: respParam.syncUnlockMarkerReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + sense)
+			},
 		},
 		recFsSelect: {
 			name: 'REC FS Select',
@@ -443,14 +469,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.recFsSelect_mode,
-					default: '480000',
+					default: respParam.recFsReturn[48],
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.recFsSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.recFsSelect + sense)
+			},
 		},
 		fileNameSelect: {
 			name: 'File Name Select',
@@ -461,14 +489,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.fileNameSelect_mode,
-					default: '00',
+					default: respParam.fileNameReturn.dateTime,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.fileNameSelect + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.fileNameSelect + sense)
+			},
 		},
 		mediaFormat: {
 			name: 'Media Format',
@@ -497,21 +527,23 @@ module.exports = function (self) {
 					id: 'key',
 					label: 'Key',
 					choices: self.auxAssignKeySelect_auxKey,
-					default: '01',
+					default: respParam.auxAssignKeyReturn.key[1],
 				},
 				{
 					type: 'dropdown',
 					id: 'mode',
 					label: 'Function',
 					choices: self.auxAssignKeySelect_function,
-					default: '00',
+					default: respParam.auxAssignKeyReturn.mode.playPause,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.auxAssignKeySelect + options.key + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async ({ options }) => {
+				self.addCmdtoQueue(SOM + cmd.auxAssignKeySelect + options.key + sense)
+			},
 		},
 		auxAssignKeyTally: {
 			name: 'Aux Assign Key Tally',
@@ -522,21 +554,23 @@ module.exports = function (self) {
 					id: 'key',
 					label: 'Key',
 					choices: self.auxAssignKeyTallySelect_auxKey,
-					default: '01',
+					default: respParam.auxAssignTallyReturn.tally[1],
 				},
 				{
 					type: 'dropdown',
 					id: 'mode',
 					label: 'Function',
 					choices: self.auxAssignKeyTallySelect_function,
-					default: '00',
+					default: respParam.auxAssignTallyReturn.mode.stop,
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.auxAssignKeyTallySelect + options.key + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async ({ options }) => {
+				self.addCmdtoQueue(SOM + cmd.auxAssignKeyTallySelect + options.key + sense)
+			},
 		},
 		meterPeakHoldTime: {
 			name: 'Meter Peak Hold Time',
@@ -547,14 +581,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.meterPeakHoldTimePreset_mode,
-					default: '00',
+					default: respParam.meterPeakTimeReturn[0],
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + sense)
+			},
 		},
 		meterPeakClear: {
 			name: 'Meter Peak Clear',
@@ -575,14 +611,16 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.digitalReferenceLevelPreset_mode,
-					default: '18',
+					default: respParam.digitalReferenceLevelReturn[18],
 				},
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + options.mode)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + sense)
+			},
 		},
 		directMarkSkipPrest: {
 			name: 'Mark - Direct Skip Preset',
@@ -787,7 +825,9 @@ module.exports = function (self) {
 				self.addCmdtoQueue(msg)
 			},
 			//learn: async () => {},
-			//subscribe: async () => {},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.recordFunctionSelect + sense)
+			},
 		},
 	})
 }

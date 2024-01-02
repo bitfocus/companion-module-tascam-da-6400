@@ -1,4 +1,4 @@
-//const {} = require('./consts.js')
+const { sense } = require('./consts.js')
 
 module.exports = {
 	record_mode: [
@@ -22,12 +22,12 @@ module.exports = {
 		{ id: '00', label: 'Repeat Off' },
 		{ id: '01', label: 'Repeat Normal' },
 		{ id: '21', label: 'Repeat Vamping' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	remoteLocal_mode: [
 		{ id: '00', label: 'Remote' },
 		{ id: '01', label: 'Local' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	play_mode: [
 		{ id: '00', label: 'All Take' },
@@ -47,7 +47,7 @@ module.exports = {
 	chase_mode: [
 		{ id: '00', label: 'Chase OFF' },
 		{ id: '01', label: 'Chase ON' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	tcGeneratorSelect_mode: [
 		{ id: '00', label: 'Free Run' },
@@ -57,7 +57,7 @@ module.exports = {
 		{ id: '04', label: 'Regen' },
 		{ id: '05', label: 'Rec Run' },
 		{ id: '06', label: 'TC Sync Rec' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	tcFrameTypeSelect_mode: [
 		{ id: '23', label: '23.976F' },
@@ -67,12 +67,12 @@ module.exports = {
 		{ id: '29', label: '29.97NDF' },
 		{ id: '30DF', label: '30DF' },
 		{ id: '30', label: '30NDF' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	tcOutputSelect_mode: [
 		{ id: '00', label: 'Generator Out' },
 		{ id: '01', label: 'Play Out' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	clockMasterSelect_mode: [
 		{ id: '00', label: 'Internal' },
@@ -80,13 +80,13 @@ module.exports = {
 		{ id: '02', label: 'Video' },
 		{ id: '03', label: 'Slot 1' },
 		{ id: '04', label: 'Slot 2' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	wordThruSelect_mode: [
 		{ id: '00', label: 'WORD OUT/TERM ON' },
 		{ id: '01', label: 'WORD OUT/TERM OFF' },
 		{ id: '11', label: 'WORD THRU/TERM OFF' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	recordFunctionSelect_tracks: [
 		{ id: 1, label: 'Track 1' },
@@ -157,40 +157,40 @@ module.exports = {
 	bitLengthSelect_mode: [
 		{ id: '16', label: '16bit' },
 		{ id: '24', label: '24bit' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	pause_mode: [
 		{ id: '00', label: 'Split' },
 		{ id: '01', label: 'No Split' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	audioOverMarketSelect_mode: [
 		{ id: '00', label: 'Marker Off' },
 		{ id: '01', label: 'Marker On' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	timeInternalMarkerSelect_mode: [
 		{ id: '00', label: 'Marker Off' },
 		{ id: '01', label: 'Marker On' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	syncUnlockMarkerSelect_mode: [
 		{ id: '00', label: 'Marker Off' },
 		{ id: '01', label: 'Marker On' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	recFsSelect_mode: [
 		{ id: '440000', label: '44.1 kHz' },
 		{ id: '480000', label: '48 kHz' },
 		{ id: '880000', label: '88.2 kHz' },
 		{ id: '960000', label: '96 kHz' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	fileNameSelect_mode: [
 		{ id: '00', label: 'Date & Time' },
 		{ id: '01', label: 'Folder' },
 		{ id: '11', label: 'User Word' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	mediaRemainSense_mode: [
 		{ id: '00', label: 'SSD' },
@@ -223,7 +223,7 @@ module.exports = {
 		{ id: '0B', label: 'TAKE/MARK SKIP-' },
 		{ id: '0C', label: 'TAKE/MARK SKIP+' },
 		{ id: '0D', label: 'MARK' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	auxAssignKeyTallySelect_auxKey: [
 		{ id: '01', label: 'AUX 1' },
@@ -240,7 +240,7 @@ module.exports = {
 		{ id: '04', label: 'EOM' },
 		{ id: '05', label: 'ERROR' },
 		{ id: '06', label: 'EOM/ERROR' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	meterPeakHoldTimePreset_mode: [
 		{ id: '00', label: 'Hold Time 0s' },
@@ -255,7 +255,7 @@ module.exports = {
 		{ id: '09', label: 'Hold Time 9s' },
 		{ id: '10', label: 'Hold Time 10s' },
 		{ id: 'FE', label: 'Hold Time Inf.' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	digitalReferenceLevelPreset_mode: [
 		{ id: '09', label: 'Reference Level - 9dB' },
@@ -263,7 +263,7 @@ module.exports = {
 		{ id: '16', label: 'Reference Level -16dB' },
 		{ id: '18', label: 'Reference Level -18dB' },
 		{ id: '20', label: 'Reference Level -20dB' },
-		{ id: 'FF', label: 'Sense' },
+		{ id: sense, label: 'Sense' },
 	],
 	directTrackSearchPreset_mode: [
 		{ id: '10', label: 'Stop' },
