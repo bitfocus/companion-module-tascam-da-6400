@@ -105,7 +105,7 @@ export const resp = {
 	errorSenseReturn: 'F8',
 	cautionSenseReturn: 'F9',
 	venderCommandReturn: 'FF',
-	projectCreateReturn: 'FF02C0',
+	projectCreateAck: 'FF02C0',
 	projectRebuildAck: 'FF02C2',
 	projectDeleteAck: 'FF02C4',
 	projectNoReturn: 'FF02D5',
@@ -178,6 +178,10 @@ export const respParam = {
 	keyboardTypeReturn: {
 		japanese: '00',
 		english: '01',
+	},
+	changeStatus: {
+		mechaStatus: '00',
+		track: '03',
 	},
 	errorSenseReturn: {
 		noError: '0-00',
@@ -370,6 +374,10 @@ export const respParam = {
 		start: '00',
 		endOK: '11',
 		endNG: '12',
+	},
+	psuErrorReturn: {
+		ok: '0700',
+		error: '0701',
 	},
 }
 

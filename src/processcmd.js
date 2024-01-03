@@ -1,4 +1,4 @@
-const { resp, cmd, SOM, cmdOnLogin } = require('./consts.js')
+const { resp, respParam, cmd, SOM, cmdOnLogin } = require('./consts.js')
 
 module.exports = {
 	async processCmd(chunk) {
@@ -31,14 +31,27 @@ module.exports = {
 				this.log('debug', `keepAlive`)
 				break
 			case resp.infoReturn:
+				this.log('info', `Firmware Version: ${reply.substr(3, 2)}.${reply.substr(5, 2)}`)
+				break
+			case resp.clockDataReturn:
 				break
 			case resp.repeatModeSelectReturn:
+				param[0] = reply.substr(3, 2)
+				this.recorder.repeatMode = param[0] === undefined ? this.recorder.repeatMode : param[0]
+				this.checkFeedbacks('repeatMode')
+				break
+			case resp.remoteLocalModeReturn:
+				param[0] = reply.substr(3, 2)
+				this.recorder.remoteLocal = param[0] === undefined ? this.recorder.remoteLocal : param[0]
+				this.checkFeedbacks('remoteLocal')
 				break
 			case resp.playModeReturn:
+				param[0] = reply.substr(3, 2)
+				this.recorder.playMode = param[0] === undefined ? this.recorder.playMode : param[0]
 				break
 			case resp.mechaStatusReturn:
 				param[0] = reply.substr(3, 2)
-				this.recorder.mechaStatus = param[0] === undefined ? this.recoder.mechaStatus : param[0]
+				this.recorder.mechaStatus = param[0] === undefined ? this.recorder.mechaStatus : param[0]
 				this.checkFeedbacks('mechaStatus')
 				break
 			case resp.trackNoStatusReturn:
@@ -73,6 +86,9 @@ module.exports = {
 			case resp.totalTrackNoTotalTimeReturn:
 				break
 			case resp.keyboardTypeReturn:
+				param[0] = reply.substr(3, 2)
+				this.recorder.keyboardType = param[0] === undefined ? this.recorder.keyboardType : param[0]
+				this.checkFeedbacks('keyboardType')
 				break
 			case resp.errorSenseRequest:
 				this.log('debug', `errorSenseRequest`)
@@ -87,10 +103,10 @@ module.exports = {
 				break
 			case resp.changeStatus:
 				param[0] = reply.substr(3, 2)
-				if (param[0] == '00') {
+				if (param[0] == respParam.changeStatus.mechaStatus) {
 					//mecha status changed
 					this.addCmdtoQueue(SOM + cmd.mechaStatusSense)
-				} else if (param[0] == '03') {
+				} else if (param[0] == respParam.changeStatus.track) {
 					//take number changed
 					this.addCmdtoQueue(SOM + cmd.trackNumStatusSense)
 				}
@@ -98,28 +114,23 @@ module.exports = {
 			case resp.errorSenseReturn:
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
 				switch (param[0]) {
-					case '0-00':
-						//no error
+					case respParam.errorSenseReturn.noError:
 						this.log('info', `errorSenseReturn: No Error`)
 						varList['error'] = 'No Error'
 						break
-					case '0-01':
-						//rec error
+					case respParam.errorSenseReturn.recError:
 						this.log('warn', `errorSenseReturn: Record Error`)
 						varList['error'] = 'Record Error'
 						break
-					case '1-02':
-						//device error
+					case respParam.errorSenseReturn.deviceError:
 						this.log('warn', `errorSenseReturn: Device Error`)
 						varList['error'] = 'Device Error'
 						break
-					case '1-09':
-						//info write error
+					case respParam.errorSenseReturn.infoWriteError:
 						this.log('warn', `errorSenseReturn: Infomation Write Error`)
 						varList['error'] = 'Infomation Write Error'
 						break
-					case '1-FF':
-						//Other Error
+					case respParam.errorSenseReturn.otherError:
 						this.log('warn', `errorSenseReturn: Other Error`)
 						varList['error'] = 'Other Error'
 						break
@@ -135,73 +146,59 @@ module.exports = {
 			case resp.cautionSenseReturn:
 				param[0] = reply[6] + '-' + reply[3] + reply[4]
 				switch (param[0]) {
-					case '0-00':
-						//no caution
+					case respParam.cautionSenseReturn.noCaution:
 						this.log('info', `cautionSenseReturn: No Caution`)
 						varList['caution'] = 'No Caution'
 						break
-					case '0-01':
-						//Media Error
+					case respParam.cautionSenseReturn.mediaError:
 						this.log('warn', `cautionSenseReturn: Media Error`)
 						varList['caution'] = 'Media Error'
 						break
-					case '1-06':
-						//Media Full
+					case respParam.cautionSenseReturn.mediaFull:
 						this.log('warn', `cautionSenseReturn: Media Full`)
 						varList['caution'] = 'Media Full'
 						break
-					case '1-07':
-						//Take Full
+					case respParam.cautionSenseReturn.takeFull:
 						this.log('warn', `cautionSenseReturn: Take Full`)
 						varList['caution'] = 'Take Full'
 						break
-					case '1-09':
-						//Digital Unlock
+					case respParam.cautionSenseReturn.digitalUnlock:
 						this.log('warn', `cautionSenseReturn: Digital Unlock`)
 						varList['caution'] = 'Digital Unlock'
 						break
-					case '1-0B':
-						//Can't REC
+					case respParam.cautionSenseReturn.cantRec:
 						this.log('warn', `cautionSenseReturn: Can't REC`)
 						varList['caution'] = "Can't REC"
 						break
-					case '1-0C':
-						//Write Protected
+					case respParam.cautionSenseReturn.writeProtected:
 						this.log('warn', `cautionSenseReturn: Write Protected`)
 						varList['caution'] = 'Write Protected'
 						break
-					case '1-0D':
-						//Not Execute
+					case respParam.cautionSenseReturn.notExecute:
 						this.log('warn', `cautionSenseReturn: Not Execute`)
 						varList['caution'] = 'Not Execute'
 						break
-					case '1-0F':
-						//Can't Edit
+					case respParam.cautionSenseReturn.cantEdit:
 						this.log('warn', `cautionSenseReturn: Can't Edit`)
 						varList['caution'] = "Can't Edit"
 						break
-					case '1-13':
-						//Can't Select
+					case respParam.cautionSenseReturn.cantSelect:
 						this.log('warn', `cautionSenseReturn: Can't Select`)
 						varList['caution'] = "Can't Select"
 						break
-					case '1-14':
-						//Track Protected
+					case respParam.cautionSenseReturn.trackProtected:
 						this.log('warn', `cautionSenseReturn: Track Protected`)
 						varList['caution'] = 'Track Protected'
 						break
-					case '1-16':
-						//Name Full
+					case respParam.cautionSenseReturn.nameFull:
 						this.log('warn', `cautionSenseReturn: Name Full`)
 						varList['caution'] = 'Name Full'
 						break
-					case '1-1E':
-						//Play Error
+					case respParam.cautionSenseReturn.playError:
 						this.log('warn', `cautionSenseReturn: Play Error`)
 						varList['caution'] = 'Play Error'
 						break
-					case '1-FF':
-						//Other Caution
+					case respParam.cautionSenseReturn.otherCaution:
 						this.log('warn', `cautionSenseReturn: Other Caution`)
 						varList['caution'] = 'Other Caution'
 						break
@@ -216,13 +213,53 @@ module.exports = {
 				break
 			case resp.venderCommandReturn:
 				switch (venderCmd) {
-					case resp.projectCreateReturn:
+					case resp.projectCreateAck:
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.createProjectACK.start:
+								this.log('info', 'Create Project started')
+								break
+							case respParam.createProjectACK.endOK:
+								this.log('info', 'Create Project completed successfully')
+								break
+							case respParam.createProjectACK.endNG:
+								this.log('warn', 'Create Project did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from createProjectAck: ${reply}`)
+						}
 						break
 					case resp.projectRebuildAck:
-						this.log('debug', `projectRebuildAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.rebuildProjectACK.start:
+								this.log('info', 'Project rebuild started')
+								break
+							case respParam.rebuildProjectACK.endOK:
+								this.log('info', 'Project rebuild completed successfully')
+								break
+							case respParam.rebuildProjectACK.endNG:
+								this.log('warn', 'Project rebuild did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from projectRebuildAck: ${reply}`)
+						}
 						break
 					case resp.projectDeleteAck:
-						this.log('debug', `projectDeleteAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.deleteProjectACK.start:
+								this.log('info', 'Project delete started')
+								break
+							case respParam.deleteProjectACK.endOK:
+								this.log('info', 'Project delete completed successfully')
+								break
+							case respParam.deleteProjectACK.endNG:
+								this.log('warn', 'Project delete did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from projectDeleteAck: ${reply}`)
+						}
 						break
 					case resp.projectNoReturn:
 						break
@@ -239,53 +276,87 @@ module.exports = {
 					case resp.markTotalNoReturn:
 						break
 					case resp.chaseReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.chaseReturn = param[0] === undefined ? this.recorder.chaseReturn : param[0]
 						break
 					case resp.tcStartTimeReturn:
 						break
 					case resp.tcUserBitsReturn:
 						break
 					case resp.tcGeneratorModeReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.tcGeneratorMode = param[0] === undefined ? this.recorder.tcGeneratorMode : param[0]
 						break
 					case resp.tcFrameTypeReturn:
 						break
 					case resp.tcOutputModeReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.tcOutputMode = param[0] === undefined ? this.recorder.tcOutputMode : param[0]
 						break
 					case resp.clockMasterReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.clockMaster = param[0] === undefined ? this.recorder.clockMaster : param[0]
 						break
 					case resp.wordThruReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.wordThru = param[0] === undefined ? this.recorder.wordThru : param[0]
 						break
 					case resp.recordFunctionReturn:
 						break
 					case resp.inputMonitorFunctionReturn:
 						break
 					case resp.bitLengthReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.bitLength = param[0] === undefined ? this.recorder.bitLength : param[0]
 						break
 					case resp.maxFileSizeReturn:
 						break
 					case resp.pauseModeReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.pauseMode = param[0] === undefined ? this.recorder.pauseMode : param[0]
 						break
 					case resp.timeIntervalMarkerTimeReturn:
 						this.log('debug', `timeIntervalMarkerTimeReturn`)
 						break
 					case resp.audioMarkerReturn:
-						this.log('debug', `audioMarkerReturn`)
+						param[0] = reply.substr(7, 2)
+						this.recorder.audioOverMarker = param[0] === undefined ? this.recorder.audioOverMarker : param[0]
 						break
 					case resp.timeIntervalMarkerReturn:
-						this.log('debug', `timeIntervalMarkerReturn`)
+						param[0] = reply.substr(7, 2)
+						this.recorder.timeIntervalMarker = param[0] === undefined ? this.recorder.timeIntervalMarker : param[0]
 						break
 					case resp.syncUnlockMarkerReturn:
-						this.log('debug', `syncUnlockMarkerReturn`)
+						param[0] = reply.substr(7, 2)
+						this.recorder.syncUnlockMarker = param[0] === undefined ? this.recorder.syncUnlockMarker : param[0]
 						break
 					case resp.recFsReturn:
+						param[0] = reply.substr(7, 6)
+						this.recorder.recFs = param[0] === undefined ? this.recorder.recFs : param[0]
 						break
 					case resp.userWordReturn:
 						break
 					case resp.fileNameReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.fileName = param[0] === undefined ? this.recorder.fileName : param[0]
 						break
 					case resp.mediaRemainReturn:
 						break
 					case resp.mediaFormatAck:
-						this.log('debug', `mediaFormatAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.mediaFormatAck.start:
+								this.log('info', 'Media format started')
+								break
+							case respParam.mediaFormatAck.endOK:
+								this.log('info', 'Media format completed successfully')
+								break
+							case respParam.mediaFormatAck.endNG:
+								this.log('warn', 'Media format did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from mediaFormatAck: ${reply}`)
+						}
 						break
 					case resp.auxAssignKeyReturn:
 						break
@@ -296,17 +367,61 @@ module.exports = {
 					case resp.outputRoutingReturn:
 						break
 					case resp.meterPeakTimeReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.meterPeakTime = param[0] === undefined ? this.recorder.meterPeakTime : param[0]
 						break
 					case resp.digitalReferenceLevelReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.digitalReferenceLevel =
+							param[0] === undefined ? this.recorder.digitalReferenceLevel : param[0]
 						break
 					case resp.takeRenameAck:
-						this.log('debug', `takeRenameAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.takeRenameAck.start:
+								this.log('info', 'Take rename started')
+								break
+							case respParam.takeRenameAck.endOK:
+								this.log('info', 'Take rename completed successfully')
+								break
+							case respParam.takeRenameAck.endNG:
+								this.log('warn', 'Take rename did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from takeRenameAck: ${reply}`)
+						}
 						break
 					case resp.takeEraseAck:
-						this.log('debug', `takeEraseAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.takeEraseAck.start:
+								this.log('info', 'Take erase started')
+								break
+							case respParam.takeEraseAck.endOK:
+								this.log('info', 'Take erase completed successfully')
+								break
+							case respParam.takeEraseAck.endNG:
+								this.log('warn', 'Take erase did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from takeEraseAck: ${reply}`)
+						}
 						break
 					case resp.takeCopyAck:
-						this.log('debug', `takeCopyAck`)
+						param[0] = reply.substr(7, 2)
+						switch (param[0]) {
+							case respParam.takeCopyAck.start:
+								this.log('info', 'Take copy started')
+								break
+							case respParam.takeCopyAck.endOK:
+								this.log('info', 'Take copy completed successfully')
+								break
+							case respParam.takeCopyAck.endNG:
+								this.log('warn', 'Take copy did not complete or it failed')
+								break
+							default:
+								this.log('warn', `unexpected parameter passed from takeCopyAck: ${reply}`)
+						}
 						break
 					case resp.psuError:
 						this.recorder.psuError = reply.substr(7, 4)

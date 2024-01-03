@@ -86,5 +86,68 @@ module.exports = async function (self) {
 				return options.psu == self.recorder.psuError
 			},
 		},
+		repeatMode: {
+			name: 'Repeat Mode',
+			type: 'boolean',
+			label: 'Repeat Mode',
+			defaultStyle: {
+				bgcolor: combineRgb(255, 0, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					choices: self.repeat_feedback,
+					default: '0701',
+				},
+			],
+			callback: ({ options }) => {
+				return options.mode == self.recorder.repeatMode
+			},
+		},
+		remoteLocal: {
+			name: 'Remote/Local Mode',
+			type: 'boolean',
+			label: 'Remote/Local Mode',
+			defaultStyle: {
+				bgcolor: combineRgb(255, 0, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					choices: self.remoteLocal_feedback,
+					default: '0701',
+				},
+			],
+			callback: ({ options }) => {
+				return options.mode == self.recorder.remoteLocal
+			},
+		},
+		keyboardType: {
+			name: 'Keyboard Type',
+			type: 'boolean',
+			label: 'Keyboard Type',
+			defaultStyle: {
+				bgcolor: combineRgb(255, 0, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					choices: self.keyboardType_feedback,
+					default: '0701',
+				},
+			],
+			callback: ({ options }) => {
+				return options.mode == self.recorder.remoteLocal
+			},
+		},
 	})
 }

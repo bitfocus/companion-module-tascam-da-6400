@@ -66,12 +66,16 @@ Enter the IP address, port and password of the recorder.
 - **Error**
 - **Mecha Status**
 - **PSU Error** Undocumented and presumed only relevant for the DA-6400dp. Unknown how to query state, so module assumes device is OK on connect.
+- **Repeat Mode**
+- **Remote/Local Mode**
+- **Keyboard Type**
 
 ## Version History
 
 ### Version 1.1.0
 - Seperate track time variables for Hours, Minutes, Seconds & Frames
 - Update companion module base to 1.6.0, update companion module tools to 1.4.2
+- Add feedbacks
 
 ### Version 1.0.2
 - Initial release
