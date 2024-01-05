@@ -2,21 +2,21 @@ const { respParam, sense } = require('./consts.js')
 
 module.exports = {
 	record_mode: [
-		{ id: '00', label: 'Record' },
-		{ id: '01', label: 'Record Pause' },
-		{ id: '02', label: 'Take Split' },
+		{ id: respParam.recordModeSelect.record, label: 'Record' },
+		{ id: respParam.recordModeSelect.recordPause, label: 'Record Pause' },
+		{ id: respParam.recordModeSelect.takeSplit, label: 'Take Split' },
 	],
 	search_mode: [
-		{ id: '00', label: 'Forward - Normal' },
-		{ id: '01', label: 'Reverse - Normal' },
-		{ id: '10', label: 'Forward - High' },
-		{ id: '11', label: 'Reverse - High' },
+		{ id: respParam.searchModeSelect.forwardNormal, label: 'Forward - Normal' },
+		{ id: respParam.searchModeSelect.reverseNormal, label: 'Reverse - Normal' },
+		{ id: respParam.searchModeSelect.forwardHigh, label: 'Forward - High' },
+		{ id: respParam.searchModeSelect.reverseHigh, label: 'Reverse - High' },
 	],
 	skip_mode: [
-		{ id: '00', label: 'Track Skip Next' },
-		{ id: '01', label: 'Track Skip Previous' },
-		{ id: '20', label: 'Mark Skip Next' },
-		{ id: '21', label: 'Mark Skip Previous' },
+		{ id: respParam.skipModeSelect.trackSkipNext, label: 'Track Skip Next' },
+		{ id: respParam.skipModeSelect.trackSkipPrevious, label: 'Track Skip Previous' },
+		{ id: respParam.skipModeSelect.markSkipNext, label: 'Mark Skip Next' },
+		{ id: respParam.skipModeSelect.markSkipPrevious, label: 'Mark Skip Previous' },
 	],
 	repeat_mode: [
 		{ id: respParam.repeatModeSelectReturn.off, label: 'Repeat Off' },
@@ -34,15 +34,15 @@ module.exports = {
 		{ id: respParam.playModeReturn.oneTake, label: 'One Take' },
 	],
 	currentTrackTime_sense: [
-		{ id: '10', label: 'Elapsed Time' },
-		{ id: '11', label: 'Remain Time' },
-		{ id: '12', label: 'Total Elapsed Time' },
-		{ id: '13', label: 'Total Remain Time' },
-		{ id: '14', label: 'Timecode Time' },
+		{ id: respParam.currentTrackTimeSelect.elapsedTime, label: 'Elapsed Time' },
+		{ id: respParam.currentTrackTimeSelect.remainTime, label: 'Remain Time' },
+		{ id: respParam.currentTrackTimeSelect.totalElapsedTime, label: 'Total Elapsed Time' },
+		{ id: respParam.currentTrackTimeSelect.totalRemainTime, label: 'Total Remain Time' },
+		{ id: respParam.currentTrackTimeSelect.timecodeTime, label: 'Timecode Time' },
 	],
 	projectSkip_mode: [
-		{ id: '00', label: 'Project Next' },
-		{ id: '01', label: 'Project Previous' },
+		{ id: respParam.projectSkipModeSelect.projectNext, label: 'Project Next' },
+		{ id: respParam.projectSkipModeSelect.projectPrevious, label: 'Project Previous' },
 	],
 	chase_mode: [
 		{ id: respParam.chaseReturn.off, label: 'Chase OFF' },
@@ -193,12 +193,12 @@ module.exports = {
 		{ id: sense, label: 'Sense' },
 	],
 	mediaRemainSense_mode: [
-		{ id: '00', label: 'SSD' },
-		{ id: '01', label: 'USB' },
+		{ id: respParam.mediaRemainSenseMode.ssd, label: 'SSD' },
+		{ id: respParam.mediaRemainSenseMode.usb, label: 'USB' },
 	],
 	mediaFormat_mode: [
-		{ id: '0000', label: 'Quick Format: SSD' },
-		{ id: '0100', label: 'Full Format: SSD' },
+		{ id: respParam.mediaFormatMode.quickFormatSSD, label: 'Quick Format: SSD' },
+		{ id: respParam.mediaFormatMode.fullFormatSSD, label: 'Full Format: SSD' },
 	],
 	auxAssignKeySelect_auxKey: [
 		{ id: respParam.auxAssignKeyReturn.key[1], label: 'AUX 1' },
@@ -266,9 +266,9 @@ module.exports = {
 		{ id: sense, label: 'Sense' },
 	],
 	directTrackSearchPreset_mode: [
-		{ id: '10', label: 'Stop' },
-		{ id: '12', label: 'Play' },
-		{ id: '14', label: 'Pause' },
+		{ id: respParam.directTrackSearchPresetMode.stop, label: 'Stop' },
+		{ id: respParam.directTrackSearchPresetMode.play, label: 'Play' },
+		{ id: respParam.directTrackSearchPresetMode.pause, label: 'Pause' },
 	],
 	mechaStatus_feedback: [
 		{ id: respParam.mechaStatusReturn.noMedia, label: 'No Media' },

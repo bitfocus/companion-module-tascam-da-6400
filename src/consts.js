@@ -150,6 +150,23 @@ export const resp = {
 }
 
 export const respParam = {
+	recordModeSelect: {
+		record: '00',
+		recordPause: '01',
+		takeSplit: '02',
+	},
+	searchModeSelect: {
+		forwardNormal: '00',
+		reverseNormal: '01',
+		forwardHigh: '10',
+		reverseHigh: '11',
+	},
+	skipModeSelect: {
+		trackSkipNext: '00',
+		trackSkipPrevious: '01',
+		markSkipNext: '20',
+		markSkipPrevious: '21',
+	},
 	repeatModeSelectReturn: {
 		off: '00',
 		normal: '01',
@@ -162,6 +179,17 @@ export const respParam = {
 	playModeReturn: {
 		allTake: '00',
 		oneTake: '01',
+	},
+	currentTrackTimeSelect: {
+		elapsedTime: '10',
+		remainTime: '11',
+		totalElapsedTime: '12',
+		totalRemainTime: '13',
+		timecodeTime: '14',
+	},
+	projectSkipModeSelect: {
+		projectNext: '00',
+		projectPrevious: '01',
 	},
 	mechaStatusReturn: {
 		noMedia: '00',
@@ -290,6 +318,14 @@ export const respParam = {
 		folder: '01',
 		userWord: '11',
 	},
+	mediaRemainSenseMode: {
+		ssd: '00',
+		usb: '01',
+	},
+	mediaFormatMode: {
+		quickFormatSSD: '0000',
+		fullFormatSSD: '0100',
+	},
 	mediaFormatAck: {
 		start: '00',
 		endOK: '11',
@@ -359,6 +395,11 @@ export const respParam = {
 		16: '16',
 		18: '18',
 		20: '20',
+	},
+	directTrackSearchPresetMode: {
+		stop: '10',
+		play: '12',
+		pause: '14',
 	},
 	takeRenameAck: {
 		start: '00',
