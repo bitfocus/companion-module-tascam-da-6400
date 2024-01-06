@@ -396,7 +396,7 @@ module.exports = async function (self) {
 				return options.mode == self.recorder.audioOverMarker
 			},
 			subscribe: async () => {
-				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + sense)
+				self.addCmdtoQueue(SOM + cmd.audioOverMarkerSelect + sense)
 			},
 		},
 		timeIntervalMarker: {

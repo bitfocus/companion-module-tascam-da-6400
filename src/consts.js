@@ -63,7 +63,7 @@ export const cmd = {
 	pauseModeSelect: '7F0824',
 	userWordSelect: '7F082A',
 	timeIntervalMarkerTimePreset: '7F0832',
-	audioOverMarketSelect: '7F0841',
+	audioOverMarkerSelect: '7F0841',
 	timeInternalMarkerSelect: '7F0842',
 	syncUnlockMarkerSelect: '7F0843',
 	recFsSelect: '7F0850',

@@ -164,7 +164,7 @@ module.exports = {
 		{ id: respParam.pauseModeReturn.noSplit, label: 'No Split' },
 		{ id: sense, label: 'Sense' },
 	],
-	audioOverMarketSelect_mode: [
+	audioOverMarkerSelect_mode: [
 		{ id: respParam.audioOverMarkerReturn.off, label: 'Marker Off' },
 		{ id: respParam.audioOverMarkerReturn.on, label: 'Marker On' },
 		{ id: sense, label: 'Sense' },

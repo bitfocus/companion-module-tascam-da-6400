@@ -458,12 +458,12 @@ module.exports = function (self) {
 					type: 'dropdown',
 					id: 'mode',
 					label: 'Mode',
-					choices: self.audioOverMarketSelect_mode,
+					choices: self.audioOverMarkerSelect_mode,
 					default: respParam.audioOverMarkerReturn.off,
 				},
 			],
 			callback: async ({ options }) => {
-				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.audioOverMarkerSelect + options.mode)
 			},
 			learn: async (action) => {
 				const mode =
@@ -474,7 +474,7 @@ module.exports = function (self) {
 				}
 			},
 			subscribe: async () => {
-				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + sense)
+				self.addCmdtoQueue(SOM + cmd.audioOverMarkerSelect + sense)
 			},
 		},
 		timeIntervalMarker: {
