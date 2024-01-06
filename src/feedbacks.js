@@ -156,7 +156,7 @@ module.exports = async function (self) {
 				return options.mode == self.recorder.keyboardType
 			},
 			subscribe: async () => {
-				self.addCmdtoQueue(SOM + cmd.keyboardTypeSense + sense)
+				self.addCmdtoQueue(SOM + cmd.keyboardTypeSense)
 			},
 		},
 		chaseMode: {
@@ -349,6 +349,30 @@ module.exports = async function (self) {
 			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + sense)
+			},
+		},
+		playMode: {
+			name: 'Play Mode',
+			type: 'boolean',
+			label: 'Play Mode',
+			defaultStyle: {
+				bgcolor: combineRgb(255, 0, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					choices: self.play_mode,
+					default: respParam.playModeReturn.allTake,
+				},
+			],
+			callback: ({ options }) => {
+				return options.mode == self.recorder.playMode
+			},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.playModeSense)
 			},
 		},
 		audioOverMarker: {

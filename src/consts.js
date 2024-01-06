@@ -238,6 +238,12 @@ export const respParam = {
 		playError: '1-1E',
 		otherCaution: '1-FF',
 	},
+	projectSelect: {
+		preamble: '0000',
+	},
+	projectDelete: {
+		preamble: '0000',
+	},
 	createProjectACK: {
 		start: '00',
 		endOK: '11',

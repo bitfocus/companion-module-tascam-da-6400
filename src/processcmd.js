@@ -48,6 +48,7 @@ module.exports = {
 			case resp.playModeReturn:
 				param[0] = reply.substr(3, 2)
 				this.recorder.playMode = param[0] === undefined ? this.recorder.playMode : param[0]
+				this.checkFeedbacks('playMode')
 				break
 			case resp.mechaStatusReturn:
 				param[0] = reply.substr(3, 2)

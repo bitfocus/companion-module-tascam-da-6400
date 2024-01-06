@@ -77,6 +77,7 @@ Enter the IP address, port and password of the recorder.
 - **Word Through**
 - **Bit Length**
 - **Pause Mode**
+- **Play Mode**
 - **Audio Over Marker**
 - **Time Interval Marker**
 - **Sync Unlock Marker**

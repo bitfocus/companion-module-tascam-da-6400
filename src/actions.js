@@ -156,9 +156,18 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.playModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.playModeSense)
 			},
-			//learn: async () => {},
-			//subscribe: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.playMode == unknown ? respParam.playModeReturn.allTake : self.recorder.playMode
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.playModeSense)
+			},
 		},
 		currentTrackTime: {
 			name: 'Current Track Time',
@@ -875,7 +884,9 @@ module.exports = function (self) {
 					return undefined
 				}
 				project = (padding + project).substr(-4)
-				self.addCmdtoQueue(SOM + cmd.projectSelect + project[2] + project[3] + project[0] + project[1])
+				self.addCmdtoQueue(
+					SOM + cmd.projectSelect + respParam.projectSelect.preamble + project[2] + project[3] + project[0] + project[1]
+				)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
@@ -901,7 +912,9 @@ module.exports = function (self) {
 					return undefined
 				}
 				project = (padding + project).substr(-4)
-				self.addCmdtoQueue(SOM + cmd.projectSelect + padding + project[2] + project[3] + project[0] + project[1])
+				self.addCmdtoQueue(
+					SOM + cmd.projectDelete + respParam.projectDelete.preamble + project[2] + project[3] + project[0] + project[1]
+				)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
