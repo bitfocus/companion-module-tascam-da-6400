@@ -1,5 +1,6 @@
 const { Regex } = require('@companion-module/base')
-const { SOM, sense, cmd, respParam } = require('./consts.js')
+const { SOM, sense, cmd, respParam, unknown } = require('./consts.js')
+const padding = '0000'
 
 module.exports = function (self) {
 	self.setActionDefinitions({
@@ -32,7 +33,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.record_mode,
-					default: '00',
+					default: respParam.recordModeSelect.record,
 				},
 			],
 			callback: async ({ options }) => {
@@ -46,7 +47,7 @@ module.exports = function (self) {
 			description: 'This pauses playback of the controlled device.',
 			options: [],
 			callback: async () => {
-				self.addCmdtoQueue(SOM + cmd.pause + '01')
+				self.addCmdtoQueue(SOM + cmd.pause + respParam.pauseSelect.pause)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
@@ -60,7 +61,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.search_mode,
-					default: '00',
+					default: respParam.searchModeSelect.forwardNormal,
 				},
 			],
 			callback: async ({ options }) => {
@@ -78,7 +79,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.skip_mode,
-					default: '00',
+					default: respParam.skipModeSelect.trackSkipNext,
 				},
 			],
 			callback: async ({ options }) => {
@@ -102,7 +103,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.repeatMode == unknown ? respParam.repeatModeSelectReturn.off : self.recorder.repeatMode
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + sense)
 			},
@@ -122,7 +130,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.remoteLocal == unknown ? respParam.remoteLocalSelectReturn.remote : self.recorder.remoteLocal
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + sense)
 			},
@@ -155,7 +170,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.currentTrackTime_sense,
-					default: '10',
+					default: respParam.currentTrackTimeSelect.elapsedTime,
 				},
 			],
 			callback: async ({ options }) => {
@@ -184,7 +199,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.ProjectSkip_mode,
-					default: '10',
+					default: respParam.projectSkipModeSelect.projectNext,
 				},
 			],
 			callback: async ({ options }) => {
@@ -218,7 +233,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.chaseSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.chaseMode == unknown ? respParam.chaseReturn.off : self.recorder.chaseReturn
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.chaseSelect + sense)
 			},
@@ -248,7 +269,16 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.tcGeneratorMode == unknown
+						? respParam.tcGeneratorModeReturn.freeRun
+						: self.recorder.tcGeneratorMode
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + sense)
 			},
@@ -268,7 +298,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.tcFrameType == unknown ? respParam.tcFrameTypeReturn[25] : self.recorder.tcFrameType
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + sense)
 			},
@@ -288,7 +324,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.tcOutputMode == unknown ? respParam.tcOutputModeReturn.generator : self.recorder.tcOutputMode
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
 			},
@@ -308,7 +351,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.clockMaster == unknown ? respParam.clockMasterReturn.internal : self.recorder.clockMaster
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
 			},
@@ -328,7 +378,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.wordThruSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.wordThru == unknown ? respParam.wordThruReturn.wordOutTermOn : self.recorder.wordThru
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.wordThruSelect + sense)
 			},
@@ -348,7 +404,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.bitLength == unknown ? respParam.bitLengthReturn[24] : self.recorder.bitLength
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + sense)
 			},
@@ -368,7 +430,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.pauseMode == unknown ? respParam.pauseModeReturn.split : self.recorder.pauseMode
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + sense)
 			},
@@ -388,7 +456,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.audioOverMarker == unknown ? respParam.audioOverMarkerReturn.off : self.recorder.audioOverMarker
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.audioOverMarketSelect + sense)
 			},
@@ -408,7 +483,16 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.timeIntervalMarker == unknown
+						? respParam.timeIntervalMarkerReturn.off
+						: self.recorder.timeIntervalMarker
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + sense)
 			},
@@ -455,7 +539,16 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.syncUnlockMarker == unknown
+						? respParam.syncUnlockMarkerReturn.off
+						: self.recorder.syncUnlockMarker
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + sense)
 			},
@@ -475,7 +568,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.recFsSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.recFs == unknown ? respParam.recFsReturn[48] : self.recorder.recFs
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.recFsSelect + sense)
 			},
@@ -495,7 +594,13 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.fileNameSelect + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode = self.recorder.fileName == unknown ? respParam.fileNameReturn.dateTime : self.recorder.fileName
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.fileNameSelect + sense)
 			},
@@ -509,7 +614,7 @@ module.exports = function (self) {
 					id: 'mode',
 					label: 'Mode',
 					choices: self.mediaFormat_mode,
-					default: '0100',
+					default: respParam.mediaFormatMode.fullFormatSSD,
 				},
 			],
 			callback: async ({ options }) => {
@@ -587,7 +692,14 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.meterPeakTime == unknown ? respParam.meterPeakTimeReturn[0] : self.recorder.meterPeakTime
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + sense)
 			},
@@ -617,7 +729,16 @@ module.exports = function (self) {
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + options.mode)
 			},
-			//learn: async () => {},
+			learn: async (action) => {
+				const mode =
+					self.recorder.digitalReferenceLevel == unknown
+						? respParam.digitalReferenceLevelReturn[18]
+						: self.recorder.digitalReferenceLevel
+				return {
+					...action.options,
+					mode: mode,
+				}
+			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + sense)
 			},
@@ -633,15 +754,16 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, //'/^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 			],
 			callback: async ({ options }) => {
-				let mark = await self.parseVariablesInString(options.mark)
-				if (mark.length != 4 || isNaN(mark)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${mark}`)
+				let mark = parseInt(await self.parseVariablesInString(options.mark))
+				if (isNaN(mark)) {
+					self.log('warn', `varible passed must be a number: ${mark}`)
 					return undefined
 				}
+				mark = (padding + mark).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.markDirectSkipPreset + mark[2] + mark[3] + mark[0] + mark[1])
 			},
 			//learn: async () => {},
@@ -658,15 +780,16 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 			],
 			callback: async ({ options }) => {
-				let mark = await self.parseVariablesInString(options.mark)
-				if (mark.length != 4 || isNaN(mark)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${mark}`)
+				let mark = parseInt(await self.parseVariablesInString(options.mark))
+				if (isNaN(mark)) {
+					self.log('warn', `varible passed must be a number: ${mark}`)
 					return undefined
 				}
+				mark = (padding + mark).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.markDelete + mark[2] + mark[3] + mark[0] + mark[1])
 			},
 			//learn: async () => {},
@@ -683,15 +806,16 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 			],
 			callback: async ({ options }) => {
-				let take = await self.parseVariablesInString(options.take)
-				if (take.length != 4 || isNaN(take)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${take}`)
+				let take = parseInt(await self.parseVariablesInString(options.take))
+				if (isNaN(take)) {
+					self.log('warn', `varible passed must be a number: ${take}`)
 					return undefined
 				}
+				take = (padding + take).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.takeErase + take[2] + take[3] + take[0] + take[1])
 			},
 			//learn: async () => {},
@@ -708,22 +832,23 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 				{
 					type: 'dropdown',
 					id: 'mode',
 					label: 'Mode after search',
 					choices: self.directTrackSearchPreset_mode,
-					default: '10',
+					default: respParam.directTrackSearchPresetMode.stop,
 				},
 			],
 			callback: async ({ options }) => {
-				let take = await self.parseVariablesInString(options.take)
-				if (take.length != 4 || isNaN(take)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${take}`)
+				let take = parseInt(await self.parseVariablesInString(options.take))
+				if (isNaN(take)) {
+					self.log('warn', `varible passed must be a number: ${take}`)
 					return undefined
 				}
+				take = (padding + take).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.takeErase + take[2] + take[3] + take[0] + take[1] + options.mode)
 			},
 			//learn: async () => {},
@@ -740,15 +865,16 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 			],
 			callback: async ({ options }) => {
-				let project = await self.parseVariablesInString(options.project)
-				if (project.length != 4 || isNaN(project)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${project}`)
+				let project = parseInt(await self.parseVariablesInString(options.project))
+				if (isNaN(project)) {
+					self.log('warn', `varible passed must be a number: ${project}`)
 					return undefined
 				}
+				project = (padding + project).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.projectSelect + project[2] + project[3] + project[0] + project[1])
 			},
 			//learn: async () => {},
@@ -765,15 +891,16 @@ module.exports = function (self) {
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
 					useVariables: true,
-					tooltip: 'Must be a four digit integer',
+					tooltip: 'Must be a one to four digit integer',
 				},
 			],
 			callback: async ({ options }) => {
-				let project = await self.parseVariablesInString(options.project)
-				if (project.length != 4 || isNaN(project)) {
-					self.log('warn', `varible passed must be a 4 digit integer: ${project}`)
+				let project = parseInt(await self.parseVariablesInString(options.project))
+				if (isNaN(project)) {
+					self.log('warn', `varible passed must be a number: ${project}`)
 					return undefined
 				}
+				project = (padding + project).substr(-4)
 				self.addCmdtoQueue(SOM + cmd.projectSelect + '0000' + project[2] + project[3] + project[0] + project[1])
 			},
 			//learn: async () => {},

@@ -277,7 +277,7 @@ module.exports = {
 						break
 					case resp.chaseReturn:
 						param[0] = reply.substr(7, 2)
-						this.recorder.chaseReturn = param[0] === undefined ? this.recorder.chaseReturn : param[0]
+						this.recorder.chaseMode = param[0] === undefined ? this.recorder.chaseReturn : param[0]
 						break
 					case resp.tcStartTimeReturn:
 						break

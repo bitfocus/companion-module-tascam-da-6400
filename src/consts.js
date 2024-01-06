@@ -4,6 +4,7 @@ export const SOM = '0'
 export const EOM = '\r\n'
 export const EndSession = 'exit'
 export const sense = 'FF'
+export const unknown = 'unknown'
 export const cmd = {
 	infoReq: '0F',
 	stop: '10',
@@ -154,6 +155,9 @@ export const respParam = {
 		record: '00',
 		recordPause: '01',
 		takeSplit: '02',
+	},
+	pauseSelect: {
+		pause: '01',
 	},
 	searchModeSelect: {
 		forwardNormal: '00',

@@ -7,7 +7,7 @@ const config = require('./config.js')
 const choices = require('./choices.js')
 const tcp = require('./tcp.js')
 const processCmd = require('./processcmd.js')
-const { EndSession, msgDelay } = require('./consts.js')
+const { EndSession, msgDelay, respParam, unknown } = require('./consts.js')
 
 class TASCAM_DA_6400 extends InstanceBase {
 	constructor(internal) {
@@ -46,55 +46,55 @@ class TASCAM_DA_6400 extends InstanceBase {
 
 	updateVariableValues() {
 		let varList = []
-		varList['trackNo'] = 'unknown'
-		varList['trackTime'] = 'unknown'
-		varList['trackTimeHours'] = 'unknown'
-		varList['trackTimeMinutes'] = 'unknown'
-		varList['trackTimeSeconds'] = 'unknown'
-		varList['trackTimeFrames'] = 'unknown'
-		varList['error'] = 'unknown'
-		varList['caution'] = 'unknown'
+		varList['trackNo'] = unknown
+		varList['trackTime'] = unknown
+		varList['trackTimeHours'] = unknown
+		varList['trackTimeMinutes'] = unknown
+		varList['trackTimeSeconds'] = unknown
+		varList['trackTimeFrames'] = unknown
+		varList['error'] = unknown
+		varList['caution'] = unknown
 		this.setVariableValues(varList)
 	}
 
 	initVariables() {
 		this.recorder = {
-			mechaStatus: 'unknown',
+			mechaStatus: unknown,
 			clock: {
-				year: 'unknown',
-				month: 'unknown',
-				day: 'unknown',
-				hour: 'unknown',
-				minute: 'unknown',
-				second: 'unknown',
+				year: unknown,
+				month: unknown,
+				day: unknown,
+				hour: unknown,
+				minute: unknown,
+				second: unknown,
 			},
-			repeatMode: 'unknown',
-			remoteLocal: 'unknown',
-			keyboardType: 'unknown',
-			playMode: 'unknown',
-			error: 'unknown',
-			caution: 'unknown',
+			repeatMode: unknown,
+			remoteLocal: unknown,
+			keyboardType: unknown,
+			playMode: unknown,
+			error: unknown,
+			caution: unknown,
 			psuError: false,
 			track: {
-				number: 'unknown',
-				time: 'unknown',
-				currentTrackTimeSense: '10',
+				number: unknown,
+				time: unknown,
+				currentTrackTimeSense: respParam.currentTrackTimeSelect.elapsedTime,
 			},
-			chaseReturn: 'unknown',
-			tcGeneratorMode: 'unknown',
-			tcFrameType: 'unknown',
-			tcOutputMode: 'unknown',
-			clockMaster: 'unknown',
-			wordThru: 'unknown',
-			bitLength: 'unknown',
-			pauseMode: 'unknown',
-			audioOverMarker: 'unknown',
-			timeIntervalMarker: 'unknown',
-			syncUnlockMarker: 'unknown',
-			recFs: 'unknown',
-			fileName: 'unknown',
-			meterPeakTime: 'unknown',
-			digitalReferenceLevel: 'unknown',
+			chaseMode: unknown,
+			tcGeneratorMode: unknown,
+			tcFrameType: unknown,
+			tcOutputMode: unknown,
+			clockMaster: unknown,
+			wordThru: unknown,
+			bitLength: unknown,
+			pauseMode: unknown,
+			audioOverMarker: unknown,
+			timeIntervalMarker: unknown,
+			syncUnlockMarker: unknown,
+			recFs: unknown,
+			fileName: unknown,
+			meterPeakTime: unknown,
+			digitalReferenceLevel: unknown,
 		}
 	}
 
