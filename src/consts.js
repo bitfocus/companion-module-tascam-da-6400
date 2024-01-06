@@ -424,6 +424,17 @@ export const respParam = {
 		ok: '0700',
 		error: '0701',
 	},
+	recordFunction: {
+		all: {
+			on: '00001',
+			off: '00000',
+		},
+		startChannel: {
+			1: '0100',
+		},
+		on: '1',
+		off: '0',
+	},
 }
 
 export const cmdOnLogin = [cmd.errorSense, cmd.cautionSense, cmd.mechaStatusSense, cmd.trackNumStatusSense]

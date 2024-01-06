@@ -349,7 +349,7 @@ module.exports = function (self) {
 				},
 			],
 			callback: async ({ options }) => {
-				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.clockMasterSelect + options.mode)
 			},
 			learn: async (action) => {
 				const mode =
@@ -360,7 +360,7 @@ module.exports = function (self) {
 				}
 			},
 			subscribe: async () => {
-				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
+				self.addCmdtoQueue(SOM + cmd.clockMasterSelect + sense)
 			},
 		},
 		wordThruSelect: {
@@ -901,7 +901,7 @@ module.exports = function (self) {
 					return undefined
 				}
 				project = (padding + project).substr(-4)
-				self.addCmdtoQueue(SOM + cmd.projectSelect + '0000' + project[2] + project[3] + project[0] + project[1])
+				self.addCmdtoQueue(SOM + cmd.projectSelect + padding + project[2] + project[3] + project[0] + project[1])
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
@@ -942,11 +942,11 @@ module.exports = function (self) {
 				let tracks = options.track
 				let msg = SOM + cmd.recordFunctionSelect
 				if (options.all) {
-					msg += options.on ? '00001' : '00000'
+					msg += options.on ? respParam.recordFunction.all.on : respParam.recordFunction.all.off
 				} else {
-					msg += '0100'
+					msg += respParam.recordFunction.startChannel[1]
 					for (let i = 1; i <= 64; i++) {
-						msg += tracks.includes(i) ? '1' : '0'
+						msg += tracks.includes(i) ? respParam.recordFunction.on : respParam.recordFunction.off
 					}
 				}
 				self.addCmdtoQueue(msg)
