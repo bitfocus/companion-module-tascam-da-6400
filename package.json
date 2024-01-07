@@ -1,6 +1,6 @@
 {
 	"name": "tascam-da-6400",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"main": "src/main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
 		"url": "git+https://github.com/bitfocus/companion-module-tascam-da-6400.git"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.6.0"
+		"@companion-module/base": "~1.7.0"
 	},
 	"devDependencies": {
 		"@companion-module/tools": "^1.4.2"

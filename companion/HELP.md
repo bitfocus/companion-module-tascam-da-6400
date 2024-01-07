@@ -58,8 +58,6 @@ Enter the IP address, port and password of the recorder.
 - **Track Time: Minutes**
 - **Track Time: Seconds**
 - **Track Time: Frames**
-- **Error Status**
-- **Caution Status**
 
 ## Feedbacks
 - **Caution**
@@ -87,6 +85,9 @@ Enter the IP address, port and password of the recorder.
 - **Digital Reference Level**
 
 ## Version History
+
+### Version 1.1.1
+- Minor fixes
 
 ### Version 1.1.0
 - Seperate track time variables for Hours, Minutes, Seconds & Frames
