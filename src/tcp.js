@@ -1,29 +1,29 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval } = require('./consts.js')
+const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval, cmdOnLogin } = require('./consts.js')
 
 module.exports = {
-	async addCmdtoQueue(msg) {
+	addCmdtoQueue(msg) {
 		if (msg !== undefined && msg.length > 0) {
-			await this.cmdQueue.push(msg)
+			this.cmdQueue.push(msg)
 			return true
 		}
 		this.log('warn', `Invalid command: ${msg}`)
 		return false
 	},
 
-	async processCmdQueue() {
-		if (this.cmdQueue.length > 0) {
-			this.sendCommand(await this.cmdQueue.splice(0, 1))
+	processCmdQueue() {
+		if (this.cmdQueue.length > 0 && this.recorder.loggedIn) {
+			this.sendCommand(this.cmdQueue.splice(0, 1))
 		}
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
 		}, msgDelay)
 	},
 
-	async sendCommand(msg) {
+	sendCommand(msg) {
 		if (msg !== undefined) {
 			if (this.socket !== undefined && this.socket.isConnected) {
-				this.log('debug', `Sending Command: ${msg}`)
+				//this.log('debug', `Sending Command: ${msg}`)
 				this.socket.send(msg + EOM)
 				return true
 			} else {
@@ -38,12 +38,25 @@ module.exports = {
 	//queries made on initial connection.
 	async queryOnConnect() {
 		this.sendCommand('  ')
-		//this.addCmdtoQueue(this.config.password)
+		if (this.config.password == '') {
+			this.updateStatus('ok', '')
+			this.recorder.loggedIn = true
+			for (let i = 0; i < cmdOnLogin.length; i++) {
+				this.addCmdtoQueue(SOM + cmdOnLogin[i])
+			}
+			this.startKeepAlive()
+		}
 	},
 
 	keepAlive() {
-		//request alive notifications
+		//track timer requests
 		this.addCmdtoQueue(SOM + cmd.currentTrackTimeSense + this.recorder.track.currentTrackTimeSense)
+		this.keepAliveTimer = setTimeout(() => {
+			this.keepAlive()
+		}, keepAliveInterval)
+	},
+
+	startKeepAlive() {
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)
@@ -67,14 +80,13 @@ module.exports = {
 			})
 			this.socket.on('error', (err) => {
 				this.log('error', `Network error: ${err.message}`)
+				this.recorder.loggedIn = false
 				clearTimeout(this.keepAliveTimer)
 			})
 			this.socket.on('connect', () => {
 				this.log('info', `Connected to ${this.config.host}:${this.config.port}`)
+				this.recorder.loggedIn = false
 				this.queryOnConnect()
-				this.keepAliveTimer = setTimeout(() => {
-					this.keepAlive()
-				}, keepAliveInterval)
 			})
 			this.socket.on('data', (chunk) => {
 				let i = 0,

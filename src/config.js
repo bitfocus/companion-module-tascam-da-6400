@@ -16,7 +16,7 @@ module.exports = {
 			{
 				type: 'textinput',
 				id: 'host',
-				label: 'Device IP',
+				label: 'Host',
 				width: 12,
 				regex: Regex.HOSTNAME,
 			},
@@ -35,7 +35,8 @@ module.exports = {
 				label: 'Password',
 				width: 6,
 				default: 'DA-6400',
-				regex: Regex.SOMETHING,
+				regex: '/^.{0,10}/g',
+				tooltip: 'Password may be up to 10 characters in length',
 			},
 		]
 	},

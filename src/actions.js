@@ -102,6 +102,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.repeatModeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -129,6 +130,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.remoteLocalModeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -241,12 +243,13 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.chaseSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.chaseSelect + sense)
 			},
 			learn: async (action) => {
-				const mode = self.recorder.chaseMode == unknown ? respParam.chaseReturn.off : self.recorder.chaseReturn
+				const chaseMode = self.recorder.chaseMode == unknown ? respParam.chaseReturn.off : self.recorder.chaseMode
 				return {
 					...action.options,
-					mode: mode,
+					mode: chaseMode,
 				}
 			},
 			subscribe: async () => {
@@ -277,6 +280,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.tcGeneratorModeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -306,6 +310,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.tcFrameTypeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.tcFrameType == unknown ? respParam.tcFrameTypeReturn[25] : self.recorder.tcFrameType
@@ -332,6 +337,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.tcOutputModeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -359,6 +365,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.clockMasterSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.clockMasterSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -386,6 +393,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.wordThruSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.wordThruSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.wordThru == unknown ? respParam.wordThruReturn.wordOutTermOn : self.recorder.wordThru
@@ -412,6 +420,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.bitLengthSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.bitLength == unknown ? respParam.bitLengthReturn[24] : self.recorder.bitLength
@@ -438,6 +447,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.pauseModeSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.pauseMode == unknown ? respParam.pauseModeReturn.split : self.recorder.pauseMode
@@ -464,6 +474,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.audioOverMarkerSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.audioOverMarkerSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -491,6 +502,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.timeInternalMarkerSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -547,6 +559,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.syncUnlockMarkerSelect + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -576,6 +589,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.recFsSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.recFsSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.recFs == unknown ? respParam.recFsReturn[48] : self.recorder.recFs
@@ -602,6 +616,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.fileNameSelect + options.mode)
+				self.addCmdtoQueue(SOM + cmd.fileNameSelect + sense)
 			},
 			learn: async (action) => {
 				const mode = self.recorder.fileName == unknown ? respParam.fileNameReturn.dateTime : self.recorder.fileName
@@ -616,7 +631,7 @@ module.exports = function (self) {
 		},
 		mediaFormat: {
 			name: 'Media Format',
-			description: 'Media Format',
+			description: 'This formats the specified media of the controlled device.',
 			options: [
 				{
 					type: 'dropdown',
@@ -653,6 +668,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.auxAssignKeySelect + options.key + options.mode)
+				self.addCmdtoQueue(SOM + cmd.auxAssignKeySelect + options.key + sense)
 			},
 			//learn: async () => {},
 			subscribe: async ({ options }) => {
@@ -680,6 +696,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.auxAssignKeyTallySelect + options.key + options.mode)
+				self.addCmdtoQueue(SOM + cmd.auxAssignKeyTallySelect + options.key + sense)
 			},
 			//learn: async () => {},
 			subscribe: async ({ options }) => {
@@ -700,6 +717,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + options.mode)
+				self.addCmdtoQueue(SOM + cmd.meterPeakHoldTimePreset + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -737,6 +755,7 @@ module.exports = function (self) {
 			],
 			callback: async ({ options }) => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + options.mode)
+				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + sense)
 			},
 			learn: async (action) => {
 				const mode =
@@ -963,6 +982,7 @@ module.exports = function (self) {
 					}
 				}
 				self.addCmdtoQueue(msg)
+				self.addCmdtoQueue(SOM + cmd.recordFunctionSelect + sense)
 			},
 			//learn: async () => {},
 			subscribe: async () => {

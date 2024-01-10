@@ -3,18 +3,24 @@ const { resp, respParam, cmd, SOM, cmdOnLogin } = require('./consts.js')
 module.exports = {
 	async processCmd(chunk) {
 		let reply = chunk.toString()
-		this.log('debug', `response recieved: ${reply}`)
+		//this.log('debug', `response recieved: ${reply}`)
 		switch (reply) {
 			case resp.password:
-				this.addCmdtoQueue(this.config.password)
+				this.sendCommand(this.config.password)
 				return true
 			case resp.loginSuccess:
 				this.updateStatus('ok', 'Logged in')
 				this.log('info', 'OK: Logged In')
+				this.recorder.loggedIn = true
 				for (let i = 0; i < cmdOnLogin.length; i++) {
 					this.addCmdtoQueue(SOM + cmdOnLogin[i])
 				}
+				this.startKeepAlive()
 				return true
+			case resp.loginFail:
+				this.recorder.loggedIn = false
+				this.log('error', 'Password is incorrect')
+				return false
 		}
 		while (reply[0] != SOM && reply.length > 0) {
 			reply = reply.slice(1)
@@ -100,7 +106,7 @@ module.exports = {
 				this.addCmdtoQueue(SOM + cmd.cautionSense)
 				break
 			case resp.illegalStatus:
-				this.log('warn', 'Illegal Status: Invalid Command')
+				this.log('warn', `Illegal Status: Invalid Command ${reply.substr(3)}`)
 				break
 			case resp.changeStatus:
 				param[0] = reply.substr(3, 2)
@@ -278,7 +284,8 @@ module.exports = {
 						break
 					case resp.chaseReturn:
 						param[0] = reply.substr(7, 2)
-						this.recorder.chaseMode = param[0] === undefined ? this.recorder.chaseReturn : param[0]
+						this.recorder.chaseMode = param[0] === undefined ? this.recorder.chaseMode : param[0]
+						this.checkFeedbacks('chaseMode')
 						break
 					case resp.tcStartTimeReturn:
 						break
@@ -287,20 +294,27 @@ module.exports = {
 					case resp.tcGeneratorModeReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.tcGeneratorMode = param[0] === undefined ? this.recorder.tcGeneratorMode : param[0]
+						this.checkFeedbacks('tcGeneratorMode')
 						break
 					case resp.tcFrameTypeReturn:
+						param[0] = reply.substr(7, 2)
+						this.recorder.tcFrameType = param[0] === undefined ? this.recorder.tcFrameType : param[0]
+						this.checkFeedbacks('tcFrameType')
 						break
 					case resp.tcOutputModeReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.tcOutputMode = param[0] === undefined ? this.recorder.tcOutputMode : param[0]
+						this.checkFeedbacks('tcOutputMode')
 						break
 					case resp.clockMasterReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.clockMaster = param[0] === undefined ? this.recorder.clockMaster : param[0]
+						this.checkFeedbacks('clockMaster')
 						break
 					case resp.wordThruReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.wordThru = param[0] === undefined ? this.recorder.wordThru : param[0]
+						this.checkFeedbacks('wordThru')
 						break
 					case resp.recordFunctionReturn:
 						break
@@ -309,12 +323,14 @@ module.exports = {
 					case resp.bitLengthReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.bitLength = param[0] === undefined ? this.recorder.bitLength : param[0]
+						this.checkFeedbacks('bitLength')
 						break
 					case resp.maxFileSizeReturn:
 						break
 					case resp.pauseModeReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.pauseMode = param[0] === undefined ? this.recorder.pauseMode : param[0]
+						this.checkFeedbacks('pauseMode')
 						break
 					case resp.timeIntervalMarkerTimeReturn:
 						this.log('debug', `timeIntervalMarkerTimeReturn`)
@@ -322,24 +338,29 @@ module.exports = {
 					case resp.audioMarkerReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.audioOverMarker = param[0] === undefined ? this.recorder.audioOverMarker : param[0]
+						this.checkFeedbacks('audioOverMarker')
 						break
 					case resp.timeIntervalMarkerReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.timeIntervalMarker = param[0] === undefined ? this.recorder.timeIntervalMarker : param[0]
+						this.checkFeedbacks('timeIntervalMarker')
 						break
 					case resp.syncUnlockMarkerReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.syncUnlockMarker = param[0] === undefined ? this.recorder.syncUnlockMarker : param[0]
+						this.checkFeedbacks('syncUnlockMarker')
 						break
 					case resp.recFsReturn:
 						param[0] = reply.substr(7, 6)
 						this.recorder.recFs = param[0] === undefined ? this.recorder.recFs : param[0]
+						this.checkFeedbacks('recFs')
 						break
 					case resp.userWordReturn:
 						break
 					case resp.fileNameReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.fileName = param[0] === undefined ? this.recorder.fileName : param[0]
+						this.checkFeedbacks('fileName')
 						break
 					case resp.mediaRemainReturn:
 						break
@@ -370,11 +391,13 @@ module.exports = {
 					case resp.meterPeakTimeReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.meterPeakTime = param[0] === undefined ? this.recorder.meterPeakTime : param[0]
+						this.checkFeedbacks('meterPeakTime')
 						break
 					case resp.digitalReferenceLevelReturn:
 						param[0] = reply.substr(7, 2)
 						this.recorder.digitalReferenceLevel =
 							param[0] === undefined ? this.recorder.digitalReferenceLevel : param[0]
+						this.checkFeedbacks('digitalReferenceLevel')
 						break
 					case resp.takeRenameAck:
 						param[0] = reply.substr(7, 2)

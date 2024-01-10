@@ -59,6 +59,7 @@ class TASCAM_DA_6400 extends InstanceBase {
 
 	initVariables() {
 		this.recorder = {
+			loggedIn: false,
 			mechaStatus: unknown,
 			clock: {
 				year: unknown,

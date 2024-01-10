@@ -254,7 +254,7 @@ module.exports = {
 		{ id: respParam.meterPeakTimeReturn[8], label: 'Hold Time 8s' },
 		{ id: respParam.meterPeakTimeReturn[9], label: 'Hold Time 9s' },
 		{ id: respParam.meterPeakTimeReturn[10], label: 'Hold Time 10s' },
-		{ id: respParam.meterPeakTimeReturn['inf'], label: 'Hold Time Inf.' },
+		{ id: respParam.meterPeakTimeReturn['inf'], label: 'Hold Time Infinite' },
 		{ id: sense, label: 'Sense' },
 	],
 	digitalReferenceLevelPreset_mode: [
@@ -405,6 +405,7 @@ module.exports = {
 		{ id: respParam.meterPeakTimeReturn[8], label: 'Hold Time 8s' },
 		{ id: respParam.meterPeakTimeReturn[9], label: 'Hold Time 9s' },
 		{ id: respParam.meterPeakTimeReturn[10], label: 'Hold Time 10s' },
+		{ id: respParam.meterPeakTimeReturn['inf'], label: 'Hold Time Infinite' },
 	],
 	digitalReferenceLevel_feedback: [
 		{ id: respParam.digitalReferenceLevelReturn[9], label: 'Reference Level - 9dB' },

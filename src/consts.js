@@ -86,6 +86,7 @@ export const cmd = {
 export const resp = {
 	password: 'Enter Password',
 	loginSuccess: 'Login Successful',
+	loginFail: 'Password is different',
 	keepAlive: 'FA',
 	infoReturn: '8F',
 	clockDataReturn: 'A7',
@@ -142,7 +143,7 @@ export const resp = {
 	auxAssignTallyReturn: 'FF1191',
 	inputRoutingReturn: 'FF12D0',
 	outputRoutingReturn: 'FF12D1',
-	meterPeakTimeReturn: 'FF13A1',
+	meterPeakTimeReturn: 'FF1321', //Proto Doc says 'FF13A1' but have observed 'FF1321'
 	digitalReferenceLevelReturn: 'FF14A0',
 	takeRenameAck: 'FF4280',
 	takeEraseAck: 'FF42B0',
