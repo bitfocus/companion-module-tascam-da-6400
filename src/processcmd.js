@@ -11,14 +11,15 @@ module.exports = {
 			case resp.loginSuccess:
 				this.updateStatus('ok', 'Logged in')
 				this.log('info', 'OK: Logged In')
-				this.recorder.loggedIn = true
+				this.startCmdQueue()
 				for (let i = 0; i < cmdOnLogin.length; i++) {
 					this.addCmdtoQueue(SOM + cmdOnLogin[i])
 				}
 				this.startKeepAlive()
+				this.stopTimeOut()
 				return true
 			case resp.loginFail:
-				this.recorder.loggedIn = false
+				this.stopCmdQueue()
 				this.log('error', 'Password is incorrect')
 				return false
 		}
@@ -34,7 +35,7 @@ module.exports = {
 		let varList = []
 		switch (response) {
 			case resp.keepAlive:
-				this.log('debug', `keepAlive`)
+				this.log('debug', `keepAlive msg recieved`)
 				break
 			case resp.infoReturn:
 				this.log('info', `Firmware Version: ${reply.substr(3, 2)}.${reply.substr(5, 2)}`)

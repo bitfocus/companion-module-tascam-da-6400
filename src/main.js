@@ -7,7 +7,7 @@ const config = require('./config.js')
 const choices = require('./choices.js')
 const tcp = require('./tcp.js')
 const processCmd = require('./processcmd.js')
-const { EndSession, msgDelay, respParam, unknown } = require('./consts.js')
+const { EndSession, respParam, unknown } = require('./consts.js')
 
 class TASCAM_DA_6400 extends InstanceBase {
 	constructor(internal) {
@@ -20,10 +20,8 @@ class TASCAM_DA_6400 extends InstanceBase {
 	async init(config) {
 		this.updateStatus('Starting')
 		this.config = config
-		this.cmdTimer = setTimeout(() => {
-			this.processCmdQueue()
-		}, msgDelay)
-		await this.initVariables()
+		this.initVariables()
+		this.startTimeOut()
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
@@ -34,9 +32,11 @@ class TASCAM_DA_6400 extends InstanceBase {
 	async destroy() {
 		this.log('debug', `destroy. ID: ${this.id}`)
 		clearTimeout(this.keepAliveTimer)
-		clearTimeout(this.cmdTimer)
+		this.stopCmdQueue()
+		this.stopTimeOut()
 		this.keepAliveTimer = null
 		this.cmdTimer = null
+		this.timeOutTimer = null
 		if (this.socket) {
 			this.sendCommand(EndSession)
 			this.socket.destroy()
@@ -59,7 +59,6 @@ class TASCAM_DA_6400 extends InstanceBase {
 
 	initVariables() {
 		this.recorder = {
-			loggedIn: false,
 			mechaStatus: unknown,
 			clock: {
 				year: unknown,

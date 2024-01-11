@@ -1,5 +1,5 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval, cmdOnLogin } = require('./consts.js')
+const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval, cmdOnLogin, timeOutInterval } = require('./consts.js')
 
 module.exports = {
 	addCmdtoQueue(msg) {
@@ -12,12 +12,24 @@ module.exports = {
 	},
 
 	processCmdQueue() {
-		if (this.cmdQueue.length > 0 && this.recorder.loggedIn) {
+		if (this.cmdQueue.length > 0) {
 			this.sendCommand(this.cmdQueue.splice(0, 1))
 		}
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
 		}, msgDelay)
+	},
+
+	startCmdQueue() {
+		this.log('debug', 'starting cmdTimer')
+		this.cmdTimer = setTimeout(() => {
+			this.processCmdQueue()
+		}, msgDelay)
+	},
+
+	stopCmdQueue() {
+		this.log('debug', 'stopping cmdTimer')
+		clearTimeout(this.cmdTimer)
 	},
 
 	sendCommand(msg) {
@@ -36,15 +48,16 @@ module.exports = {
 	},
 
 	//queries made on initial connection.
-	async queryOnConnect() {
+	queryOnConnect() {
 		this.sendCommand('  ')
 		if (this.config.password == '') {
 			this.updateStatus('ok', '')
-			this.recorder.loggedIn = true
+			this.startCmdQueue()
 			for (let i = 0; i < cmdOnLogin.length; i++) {
 				this.addCmdtoQueue(SOM + cmdOnLogin[i])
 			}
 			this.startKeepAlive()
+			this.stopTimeOut()
 		}
 	},
 
@@ -57,9 +70,30 @@ module.exports = {
 	},
 
 	startKeepAlive() {
+		this.log('debug', 'starting keepAliveTimer')
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)
+	},
+
+	timeOut() {
+		//dump cmdQueue to prevent huge excessive queuing of old commands
+		this.cmdQueue = []
+		this.timeOutTimer = setTimeout(() => {
+			this.timeOut()
+		}, timeOutInterval)
+	},
+
+	startTimeOut() {
+		this.log('debug', 'starting timeOutTimer')
+		this.timeOutTimer = setTimeout(() => {
+			this.timeOut()
+		}, timeOutInterval)
+	},
+
+	stopTimeOut() {
+		this.log('debug', 'stopping timeOutTimer')
+		clearTimeout(this.timeOutTimer)
 	},
 
 	initTCP() {
@@ -68,6 +102,8 @@ module.exports = {
 			this.sendCommand(EndSession)
 			this.socket.destroy()
 			delete this.socket
+			this.startTimeOut()
+			this.stopCmdQueue()
 		}
 		if (this.config.host) {
 			this.log('debug', 'Creating New Socket')
@@ -80,12 +116,12 @@ module.exports = {
 			})
 			this.socket.on('error', (err) => {
 				this.log('error', `Network error: ${err.message}`)
-				this.recorder.loggedIn = false
+				this.stopCmdQueue()
 				clearTimeout(this.keepAliveTimer)
+				this.startTimeOut()
 			})
 			this.socket.on('connect', () => {
 				this.log('info', `Connected to ${this.config.host}:${this.config.port}`)
-				this.recorder.loggedIn = false
 				this.queryOnConnect()
 			})
 			this.socket.on('data', (chunk) => {
