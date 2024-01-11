@@ -77,7 +77,7 @@ module.exports = {
 	},
 
 	timeOut() {
-		//dump cmdQueue to prevent huge excessive queuing of old commands
+		//dump cmdQueue to prevent excessive queuing of old commands
 		this.cmdQueue = []
 		this.timeOutTimer = setTimeout(() => {
 			this.timeOut()
