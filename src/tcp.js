@@ -22,6 +22,7 @@ module.exports = {
 
 	startCmdQueue() {
 		this.log('debug', 'starting cmdTimer')
+		clearTimeout(this.cmdTimer)
 		this.cmdTimer = setTimeout(() => {
 			this.processCmdQueue()
 		}, msgDelay)
@@ -30,6 +31,7 @@ module.exports = {
 	stopCmdQueue() {
 		this.log('debug', 'stopping cmdTimer')
 		clearTimeout(this.cmdTimer)
+		this.cmdTimer = null
 	},
 
 	sendCommand(msg) {
@@ -76,6 +78,12 @@ module.exports = {
 		}, keepAliveInterval)
 	},
 
+	stopKeepAlive() {
+		this.log('debug', 'stopping keepAliveTimer')
+		clearTimeout(this.keepAliveTimer)
+		this.keepAliveTimer = null
+	},
+
 	timeOut() {
 		//dump cmdQueue to prevent excessive queuing of old commands
 		this.cmdQueue = []
@@ -86,6 +94,7 @@ module.exports = {
 
 	startTimeOut() {
 		this.log('debug', 'starting timeOutTimer')
+		clearTimeout(this.timeOutTimer)
 		this.timeOutTimer = setTimeout(() => {
 			this.timeOut()
 		}, timeOutInterval)
@@ -94,6 +103,7 @@ module.exports = {
 	stopTimeOut() {
 		this.log('debug', 'stopping timeOutTimer')
 		clearTimeout(this.timeOutTimer)
+		this.timeOutTimer = null
 	},
 
 	initTCP() {
@@ -104,6 +114,7 @@ module.exports = {
 			delete this.socket
 			this.startTimeOut()
 			this.stopCmdQueue()
+			this.stopKeepAlive()
 		}
 		if (this.config.host) {
 			this.log('debug', 'Creating New Socket')
@@ -117,11 +128,12 @@ module.exports = {
 			this.socket.on('error', (err) => {
 				this.log('error', `Network error: ${err.message}`)
 				this.stopCmdQueue()
-				clearTimeout(this.keepAliveTimer)
+				this.stopKeepAlive()
 				this.startTimeOut()
 			})
 			this.socket.on('connect', () => {
 				this.log('info', `Connected to ${this.config.host}:${this.config.port}`)
+				this.receiveBuffer = ''
 				this.queryOnConnect()
 			})
 			this.socket.on('data', (chunk) => {

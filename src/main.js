@@ -15,6 +15,7 @@ class TASCAM_DA_6400 extends InstanceBase {
 		Object.assign(this, { ...config, ...tcp, ...processCmd, ...choices })
 		this.keepAliveTimer = {}
 		this.cmdTimer = {}
+		this.timeOutTimer = {}
 		this.cmdQueue = []
 	}
 	async init(config) {
@@ -31,12 +32,9 @@ class TASCAM_DA_6400 extends InstanceBase {
 	// When module gets deleted
 	async destroy() {
 		this.log('debug', `destroy. ID: ${this.id}`)
-		clearTimeout(this.keepAliveTimer)
+		this.stopKeepAlive()
 		this.stopCmdQueue()
 		this.stopTimeOut()
-		this.keepAliveTimer = null
-		this.cmdTimer = null
-		this.timeOutTimer = null
 		if (this.socket) {
 			this.sendCommand(EndSession)
 			this.socket.destroy()

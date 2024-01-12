@@ -171,7 +171,7 @@ This turns the record function of the controlled device on/off.
 
 ## Version History
 
-### Version 1.1.2
+### Version 1.1.3
 - Bug fixes
 
 ### Version 1.1.1
