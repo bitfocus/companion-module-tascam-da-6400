@@ -877,7 +877,7 @@ module.exports = function (self) {
 					return undefined
 				}
 				take = (padding + take).substr(-4)
-				self.addCmdtoQueue(SOM + cmd.takeErase + take[2] + take[3] + take[0] + take[1] + options.mode)
+				self.addCmdtoQueue(SOM + cmd.directTrackSearchPreset + take[2] + take[3] + take[0] + take[1] + options.mode)
 			},
 			//learn: async () => {},
 			//subscribe: async () => {},
