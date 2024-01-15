@@ -13,9 +13,6 @@ class TASCAM_DA_6400 extends InstanceBase {
 	constructor(internal) {
 		super(internal)
 		Object.assign(this, { ...config, ...tcp, ...processCmd, ...choices })
-		this.keepAliveTimer = {}
-		this.cmdTimer = {}
-		this.timeOutTimer = {}
 		this.cmdQueue = []
 	}
 	async init(config) {
