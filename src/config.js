@@ -2,13 +2,13 @@ const { Regex } = require('@companion-module/base')
 
 module.exports = {
 	async configUpdated(config) {
-		//let oldConfig = this.config
 		this.config = config
 		this.initTCP()
 		this.initVariables()
 		this.updateActions()
 		this.updateFeedbacks()
 		this.updateVariableDefinitions()
+		this.updatePresetsDefinitions()
 	},
 	// Return config fields for web config
 	getConfigFields() {
@@ -35,7 +35,7 @@ module.exports = {
 				label: 'Password',
 				width: 6,
 				default: 'DA-6400',
-				regex: '/^.{0,10}/g',
+				regex: '/^.{0,10}/',
 				tooltip: 'Password may be up to 10 characters in length',
 			},
 		]
