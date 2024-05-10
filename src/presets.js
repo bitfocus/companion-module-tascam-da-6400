@@ -395,6 +395,12 @@ module.exports = async function (self) {
 			},
 		],
 	}
+	presets['track-skip-header'] = {
+		category: 'Transport',
+		type: 'text',
+		name: 'Track Skip',
+		text: '',
+	}
 	presets[`track_skip_back`] = {
 		type: 'button',
 		category: 'Transport',
@@ -451,6 +457,12 @@ module.exports = async function (self) {
 		],
 		feedbacks: [],
 	}
+	presets['mark-skip-header'] = {
+		category: 'Transport',
+		type: 'text',
+		name: 'Mark Skip',
+		text: '',
+	}
 	presets[`mark_skip_back`] = {
 		type: 'button',
 		category: 'Transport',
@@ -506,6 +518,12 @@ module.exports = async function (self) {
 			},
 		],
 		feedbacks: [],
+	}
+	presets['search-header'] = {
+		category: 'Transport',
+		type: 'text',
+		name: 'Search',
+		text: '',
 	}
 	presets[`search_back`] = {
 		type: 'button',
@@ -584,6 +602,12 @@ module.exports = async function (self) {
 				},
 			},
 		],
+	}
+	presets['search-fast-header'] = {
+		category: 'Transport',
+		type: 'text',
+		name: 'Search Fast',
+		text: '',
 	}
 	presets[`search_back_fast`] = {
 		type: 'button',

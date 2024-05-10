@@ -173,6 +173,7 @@ This turns the record function of the controlled device on/off.
 
 ### Version 1.2.2
 - Better status updates
+- Transport preset layout
 - Update companion module base to 1.8.0
 
 ### Version 1.2.1
