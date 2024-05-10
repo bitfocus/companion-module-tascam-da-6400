@@ -57,7 +57,7 @@ module.exports = {
 	queryOnConnect() {
 		this.sendCommand('  ')
 		if (this.config.password == '') {
-			this.updateStatus('ok', '')
+			this.updateStatus(InstanceStatus.Ok, '')
 			this.startCmdQueue()
 			for (let i = 0; i < cmdOnLogin.length; i++) {
 				this.addCmdtoQueue(SOM + cmdOnLogin[i])
@@ -130,7 +130,7 @@ module.exports = {
 		if (this.config.host) {
 			this.log('debug', 'Creating New Socket')
 
-			this.updateStatus(`Connecting to DA-6400: ${this.config.host}:${this.config.port}`)
+			this.updateStatus(InstanceStatus.Connecting, `Connecting to DA-6400: ${this.config.host}`)
 			this.socket = new TCPHelper(this.config.host, this.config.port)
 
 			this.socket.on('status_change', (status, message) => {
@@ -138,12 +138,14 @@ module.exports = {
 			})
 			this.socket.on('error', (err) => {
 				this.log('error', `Network error: ${err.message}`)
+				this.updateStatus(InstanceStatus.ConnectionFailure, err.message)
 				this.stopCmdQueue()
 				this.stopKeepAlive()
 				this.startTimeOut()
 			})
 			this.socket.on('connect', () => {
 				this.log('info', `Connected to ${this.config.host}:${this.config.port}`)
+				this.updateStatus(InstanceStatus.Connecting, 'Connection Established')
 				this.receiveBuffer = ''
 				this.queryOnConnect()
 			})
