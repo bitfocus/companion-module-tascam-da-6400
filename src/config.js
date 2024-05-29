@@ -37,7 +37,7 @@ module.exports = {
 				label: 'Password',
 				width: 6,
 				default: 'DA-6400',
-				regex: '/^.{0,10}/',
+				regex: '/^.{0,10}$/',
 				tooltip: 'Password may be up to 10 characters in length',
 			},
 		]
