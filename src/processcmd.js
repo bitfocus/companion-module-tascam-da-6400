@@ -21,7 +21,7 @@ module.exports = {
 				this.startKeepAlive()
 				return true
 			case resp.loginFail:
-				this.updateStatus(InstanceStatus.BadConfig, 'Login Fail')
+				this.updateStatus(InstanceStatus.AuthenticationFailure, 'Incorrect Password')
 				this.log('error', 'Password is incorrect')
 				this.stopCmdQueue()
 				this.stopKeepAlive()

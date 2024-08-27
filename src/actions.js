@@ -539,7 +539,7 @@ module.exports = function (self) {
 					return undefined
 				}
 				self.addCmdtoQueue(
-					SOM + cmd.timeIntervalMarkerTimePreset + interval[2] + interval[3] + interval[0] + interval[1]
+					SOM + cmd.timeIntervalMarkerTimePreset + interval[2] + interval[3] + interval[0] + interval[1],
 				)
 			},
 			//learn: async () => {},
@@ -904,7 +904,13 @@ module.exports = function (self) {
 				}
 				project = (padding + project).substr(-4)
 				self.addCmdtoQueue(
-					SOM + cmd.projectSelect + respParam.projectSelect.preamble + project[2] + project[3] + project[0] + project[1]
+					SOM +
+						cmd.projectSelect +
+						respParam.projectSelect.preamble +
+						project[2] +
+						project[3] +
+						project[0] +
+						project[1],
 				)
 			},
 			//learn: async () => {},
@@ -932,7 +938,13 @@ module.exports = function (self) {
 				}
 				project = (padding + project).substr(-4)
 				self.addCmdtoQueue(
-					SOM + cmd.projectDelete + respParam.projectDelete.preamble + project[2] + project[3] + project[0] + project[1]
+					SOM +
+						cmd.projectDelete +
+						respParam.projectDelete.preamble +
+						project[2] +
+						project[3] +
+						project[0] +
+						project[1],
 				)
 			},
 			//learn: async () => {},
