@@ -445,4 +445,10 @@ export const respParam = {
 	},
 }
 
-export const cmdOnLogin = [cmd.errorSense, cmd.cautionSense, cmd.mechaStatusSense, cmd.trackNumStatusSense]
+export const cmdOnLogin = [
+	cmd.errorSense,
+	cmd.cautionSense,
+	cmd.mechaStatusSense,
+	cmd.trackNumStatusSense,
+	cmd.recordFunctionSelect + sense,
+]
