@@ -323,8 +323,8 @@ module.exports = {
 						this.checkFeedbacks('wordThru')
 						break
 					case resp.recordFunctionReturn:
-						for (let i = 0; i < 64; i++ ) {
-							self.recorder.trackArmed[i] = reply[i + 11] == '1' ? true : false
+						for (let i = 0; i < 64; i++) {
+							this.recorder.trackArmed[i] = reply[i + 11] == '1' ? true : false
 						}
 						this.checkFeedbacks('trackArmed')
 						break
