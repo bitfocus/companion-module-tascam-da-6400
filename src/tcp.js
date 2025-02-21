@@ -70,6 +70,7 @@ module.exports = {
 	keepAlive() {
 		//track timer requests
 		this.addCmdtoQueue(SOM + cmd.currentTrackTimeSense + this.recorder.track.currentTrackTimeSense)
+		this.addCmdtoQueue(SOM + cmd.recordFunctionSelect + sense)
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)

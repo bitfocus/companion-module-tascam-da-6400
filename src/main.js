@@ -92,6 +92,10 @@ class TASCAM_DA_6400 extends InstanceBase {
 			fileName: unknown,
 			meterPeakTime: unknown,
 			digitalReferenceLevel: unknown,
+			trackArmed: [],
+		}
+		for (let i = 0; i < 64; i++) {
+			this.recorder.trackArmed[i] = false
 		}
 	}
 
