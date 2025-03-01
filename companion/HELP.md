@@ -217,6 +217,7 @@ This turns the record function of the controlled device on/off.
 ### Version 1.3.0
 
 - Track Armed Feedback
+- Parse local variables in actions
 
 ### Version 1.2.5
 

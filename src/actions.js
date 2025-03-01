@@ -528,12 +528,12 @@ module.exports = function (self) {
 					label: 'Time Interval (minutes)',
 					default: '0060',
 					regex: Regex.SOMETHING, //'/^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let interval = await self.parseVariablesInString(options.interval)
+			callback: async ({ options }, context) => {
+				let interval = await context.parseVariablesInString(options.interval)
 				if (interval.length != 4 || isNaN(interval)) {
 					self.log('warn', `varible passed must be a 4 digit integer: ${interval}`)
 					return undefined
@@ -781,12 +781,12 @@ module.exports = function (self) {
 					label: 'Mark',
 					default: '0001',
 					regex: Regex.SOMETHING, //'/^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let mark = parseInt(await self.parseVariablesInString(options.mark))
+			callback: async ({ options }, context) => {
+				let mark = parseInt(await context.parseVariablesInString(options.mark))
 				if (isNaN(mark)) {
 					self.log('warn', `varible passed must be a number: ${mark}`)
 					return undefined
@@ -807,12 +807,12 @@ module.exports = function (self) {
 					label: 'Mark',
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let mark = parseInt(await self.parseVariablesInString(options.mark))
+			callback: async ({ options }, context) => {
+				let mark = parseInt(await context.parseVariablesInString(options.mark))
 				if (isNaN(mark)) {
 					self.log('warn', `varible passed must be a number: ${mark}`)
 					return undefined
@@ -833,12 +833,12 @@ module.exports = function (self) {
 					label: 'Take',
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let take = parseInt(await self.parseVariablesInString(options.take))
+			callback: async ({ options }, context) => {
+				let take = parseInt(await context.parseVariablesInString(options.take))
 				if (isNaN(take)) {
 					self.log('warn', `varible passed must be a number: ${take}`)
 					return undefined
@@ -859,7 +859,7 @@ module.exports = function (self) {
 					label: 'Take',
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 				{
@@ -870,8 +870,8 @@ module.exports = function (self) {
 					default: respParam.directTrackSearchPresetMode.stop,
 				},
 			],
-			callback: async ({ options }) => {
-				let take = parseInt(await self.parseVariablesInString(options.take))
+			callback: async ({ options }, context) => {
+				let take = parseInt(await context.parseVariablesInString(options.take))
 				if (isNaN(take)) {
 					self.log('warn', `varible passed must be a number: ${take}`)
 					return undefined
@@ -892,12 +892,12 @@ module.exports = function (self) {
 					label: 'Project',
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let project = parseInt(await self.parseVariablesInString(options.project))
+			callback: async ({ options }, context) => {
+				let project = parseInt(await context.parseVariablesInString(options.project))
 				if (isNaN(project)) {
 					self.log('warn', `varible passed must be a number: ${project}`)
 					return undefined
@@ -926,12 +926,12 @@ module.exports = function (self) {
 					label: 'Project',
 					default: '0001',
 					regex: Regex.SOMETHING, ///^[0-9]{4}/g',
-					useVariables: true,
+					useVariables: { local: true },
 					tooltip: 'Must be a one to four digit integer',
 				},
 			],
-			callback: async ({ options }) => {
-				let project = parseInt(await self.parseVariablesInString(options.project))
+			callback: async ({ options }, context) => {
+				let project = parseInt(await context.parseVariablesInString(options.project))
 				if (isNaN(project)) {
 					self.log('warn', `varible passed must be a number: ${project}`)
 					return undefined
