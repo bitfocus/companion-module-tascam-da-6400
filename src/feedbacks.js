@@ -7,10 +7,7 @@ module.exports = async function (self) {
 			name: 'Mecha Status',
 			type: 'boolean',
 			label: 'Mecha Status',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'status',
@@ -28,10 +25,7 @@ module.exports = async function (self) {
 			name: 'Error State',
 			type: 'boolean',
 			label: 'Error State',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'error',
@@ -49,10 +43,7 @@ module.exports = async function (self) {
 			name: 'Caution State',
 			type: 'boolean',
 			label: 'Caution State',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'caution',
@@ -70,10 +61,7 @@ module.exports = async function (self) {
 			name: 'PSU State',
 			type: 'boolean',
 			label: 'PSU State',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'psu',
@@ -91,10 +79,7 @@ module.exports = async function (self) {
 			name: 'Repeat Mode',
 			type: 'boolean',
 			label: 'Repeat Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -115,10 +100,7 @@ module.exports = async function (self) {
 			name: 'Remote/Local Mode',
 			type: 'boolean',
 			label: 'Remote/Local Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -139,10 +121,7 @@ module.exports = async function (self) {
 			name: 'Keyboard Type',
 			type: 'boolean',
 			label: 'Keyboard Type',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -163,10 +142,7 @@ module.exports = async function (self) {
 			name: 'Chase Mode',
 			type: 'boolean',
 			label: 'Chase Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -187,10 +163,7 @@ module.exports = async function (self) {
 			name: 'TC Generator Mode',
 			type: 'boolean',
 			label: 'Timecode Generator Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -211,10 +184,7 @@ module.exports = async function (self) {
 			name: 'TC Frame Type',
 			type: 'boolean',
 			label: 'Timecode Frame Type',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -235,10 +205,7 @@ module.exports = async function (self) {
 			name: 'TC Output Mode',
 			type: 'boolean',
 			label: 'Timecode Output Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -259,10 +226,7 @@ module.exports = async function (self) {
 			name: 'Clock Master',
 			type: 'boolean',
 			label: 'Clock Master',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -283,10 +247,7 @@ module.exports = async function (self) {
 			name: 'Word Through',
 			type: 'boolean',
 			label: 'Word Through / Terminiation',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -307,10 +268,7 @@ module.exports = async function (self) {
 			name: 'Bit Length',
 			type: 'boolean',
 			label: 'Bit Length',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -331,10 +289,7 @@ module.exports = async function (self) {
 			name: 'Pause Mode',
 			type: 'boolean',
 			label: 'Pause Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -355,10 +310,7 @@ module.exports = async function (self) {
 			name: 'Play Mode',
 			type: 'boolean',
 			label: 'Play Mode',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -379,10 +331,7 @@ module.exports = async function (self) {
 			name: 'Audio Over Marker',
 			type: 'boolean',
 			label: 'Audio Over Marker',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -403,10 +352,7 @@ module.exports = async function (self) {
 			name: 'Time Interval Marker',
 			type: 'boolean',
 			label: 'Time Interval Marker',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -427,10 +373,7 @@ module.exports = async function (self) {
 			name: 'Sync Unlock Marker',
 			type: 'boolean',
 			label: 'Sync Unlock Marker',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -451,10 +394,7 @@ module.exports = async function (self) {
 			name: 'Rec FS',
 			type: 'boolean',
 			label: 'Record Sample Rate',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -475,10 +415,7 @@ module.exports = async function (self) {
 			name: 'File Name',
 			type: 'boolean',
 			label: 'File Name',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -499,10 +436,7 @@ module.exports = async function (self) {
 			name: 'Meter Peak Time',
 			type: 'boolean',
 			label: 'Meter Peak Time',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -523,10 +457,7 @@ module.exports = async function (self) {
 			name: 'Digital Reference Level',
 			type: 'boolean',
 			label: 'Digital Reference Level',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
 			options: [
 				{
 					id: 'mode',
@@ -541,6 +472,19 @@ module.exports = async function (self) {
 			},
 			subscribe: async () => {
 				self.addCmdtoQueue(SOM + cmd.digitalReferenceLevelPreset + sense)
+			},
+		},
+		trackArmed: {
+			name: 'Track Armed',
+			type: 'boolean',
+			label: 'Track Armed',
+			defaultStyle: { bgcolor: combineRgb(255, 0, 0), color: combineRgb(0, 0, 0) },
+			options: [{ id: 'track', type: 'number', label: 'Track', min: 1, max: 64, range: true, step: 1, default: 1 }],
+			callback: ({ options }) => {
+				return self.recorder.trackArmed[Math.floor(options.track) - 1]
+			},
+			subscribe: async () => {
+				self.addCmdtoQueue(SOM + cmd.recordFunctionSelect + sense)
 			},
 		},
 	})

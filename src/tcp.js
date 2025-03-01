@@ -1,5 +1,15 @@
 const { InstanceStatus, TCPHelper } = require('@companion-module/base')
-const { msgDelay, cmd, SOM, EOM, EndSession, keepAliveInterval, cmdOnLogin, timeOutInterval } = require('./consts.js')
+const {
+	msgDelay,
+	cmd,
+	SOM,
+	EOM,
+	EndSession,
+	keepAliveInterval,
+	cmdOnLogin,
+	sense,
+	timeOutInterval,
+} = require('./consts.js')
 
 module.exports = {
 	addCmdtoQueue(msg) {
@@ -70,6 +80,7 @@ module.exports = {
 	keepAlive() {
 		//track timer requests
 		this.addCmdtoQueue(SOM + cmd.currentTrackTimeSense + this.recorder.track.currentTrackTimeSense)
+		this.addCmdtoQueue(SOM + cmd.recordFunctionSelect + sense)
 		this.keepAliveTimer = setTimeout(() => {
 			this.keepAlive()
 		}, keepAliveInterval)
